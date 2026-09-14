@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
+import { createContext, useContext, useEffect, useState, type CSSProperties, type ReactNode } from 'react';
 
 type RouterContextValue = {
   path: string;
@@ -38,17 +38,20 @@ export function Link({
   children,
   className,
   onClick,
+  style,
 }: {
   to: string;
   children: ReactNode;
   className?: string;
   onClick?: () => void;
+  style?: CSSProperties;
 }) {
   const { navigate } = useRouter();
   return (
     <a
       href={to}
       className={className}
+      style={style}
       onClick={(e) => {
         e.preventDefault();
         navigate(to);

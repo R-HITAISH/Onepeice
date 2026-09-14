@@ -26,19 +26,19 @@ export function AuthPage() {
   };
 
   return (
-    <div className="max-w-md mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
-      <h1 className="font-display text-5xl uppercase mb-2">
+    <div className="max-w-md mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+      <h1 className="font-display text-4xl mb-2" style={{ fontWeight: 400 }}>
         {mode === 'signin' ? 'Sign in' : 'Create account'}
       </h1>
-      <p className="font-body text-sm text-muted mb-8">
+      <p className="label-quiet mb-10">
         {mode === 'signin'
           ? 'Access your order history and saved items.'
           : 'Start buying and tracking one-of-one pieces.'}
       </p>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-5">
         <div>
-          <label className="font-body text-xs uppercase text-muted block mb-1">Email</label>
+          <label className="label-quiet block mb-1.5">Email</label>
           <input
             type="email"
             required
@@ -49,7 +49,7 @@ export function AuthPage() {
           />
         </div>
         <div>
-          <label className="font-body text-xs uppercase text-muted block mb-1">Password</label>
+          <label className="label-quiet block mb-1.5">Password</label>
           <input
             type="password"
             required
@@ -62,8 +62,8 @@ export function AuthPage() {
         </div>
 
         {error && (
-          <div className="flex items-start gap-2 p-3 border-2 border-error bg-error/10 text-error font-body text-sm">
-            <AlertTriangle size={16} className="shrink-0 mt-0.5" />
+          <div className="flex items-start gap-2 p-3 text-error font-body text-sm">
+            <AlertTriangle size={15} className="shrink-0 mt-0.5" />
             {error}
           </div>
         )}
@@ -71,11 +71,11 @@ export function AuthPage() {
         <button
           type="submit"
           disabled={loading}
-          className="btn btn-primary w-full disabled:opacity-50 disabled:cursor-not-allowed"
+          className="btn btn-primary w-full disabled:opacity-40 disabled:cursor-not-allowed"
         >
           {loading ? (
             <>
-              <Loader2 size={16} className="animate-spin" />
+              <Loader2 size={15} className="animate-spin" />
               {mode === 'signin' ? 'Signing in...' : 'Creating...'}
             </>
           ) : mode === 'signin' ? (
@@ -86,29 +86,23 @@ export function AuthPage() {
         </button>
       </form>
 
-      <div className="mt-6 text-center">
+      <div className="mt-8 text-center">
         {mode === 'signin' ? (
-          <p className="font-body text-sm text-muted">
+          <p className="label-quiet">
             No account?{' '}
             <button
-              onClick={() => {
-                setMode('signup');
-                setError(null);
-              }}
-              className="text-accent hover:underline font-bold"
+              onClick={() => { setMode('signup'); setError(null); }}
+              className="text-brass hover:underline"
             >
               Create one
             </button>
           </p>
         ) : (
-          <p className="font-body text-sm text-muted">
+          <p className="label-quiet">
             Already have an account?{' '}
             <button
-              onClick={() => {
-                setMode('signin');
-                setError(null);
-              }}
-              className="text-accent hover:underline font-bold"
+              onClick={() => { setMode('signin'); setError(null); }}
+              className="text-brass hover:underline"
             >
               Sign in
             </button>
@@ -116,8 +110,8 @@ export function AuthPage() {
         )}
       </div>
 
-      <div className="mt-8 text-center">
-        <Link to="/" className="font-body text-xs uppercase tracking-wider text-muted hover:text-accent">
+      <div className="mt-10 text-center">
+        <Link to="/" className="label-quiet hover:text-brass">
           Back to home
         </Link>
       </div>

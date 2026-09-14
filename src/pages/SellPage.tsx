@@ -80,12 +80,12 @@ export function SellPage() {
 
   if (success) {
     return (
-      <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
-        <div className="inline-flex items-center justify-center w-20 h-20 border-2 border-ink bg-accent text-bone mb-6">
-          <Check size={40} />
+      <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
+        <div className="inline-flex items-center justify-center w-16 h-16 bg-brass text-ivory mb-6">
+          <Check size={32} />
         </div>
-        <h1 className="font-display text-5xl uppercase mb-3">Submission received</h1>
-        <p className="font-body text-sm text-muted mb-8 max-w-md mx-auto">
+        <h1 className="font-display text-3xl mb-3" style={{ fontWeight: 400 }}>Submission received</h1>
+        <p className="label-quiet mb-8 max-w-md mx-auto">
           We'll review your piece and get back to you within 48 hours. If it fits the drop,
           we'll send you an offer.
         </p>
@@ -113,22 +113,20 @@ export function SellPage() {
   }
 
   return (
-    <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
-      <div className="mb-8">
-        <p className="font-body text-xs uppercase tracking-widest text-muted mb-2">
-          Got something worth reselling?
-        </p>
-        <h1 className="font-display text-5xl md:text-6xl uppercase mb-3">Sell to us</h1>
+    <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-16">
+      <div className="mb-10">
+        <p className="label-quiet mb-2">Got something worth reselling?</p>
+        <h1 className="font-display text-4xl md:text-5xl mb-4" style={{ fontWeight: 400 }}>Sell to us</h1>
         <p className="font-body text-sm text-muted leading-relaxed max-w-md">
           Tell us what you've got. If it fits the drop, we'll make you an offer. No fluff,
           no lowballing — just fair prices for real pieces.
         </p>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-5">
-        <div className="grid sm:grid-cols-2 gap-3">
+      <form onSubmit={handleSubmit} className="space-y-6">
+        <div className="grid sm:grid-cols-2 gap-4">
           <div>
-            <label className="font-body text-xs uppercase text-muted block mb-1">Your name</label>
+            <label className="label-quiet block mb-1.5">Your name</label>
             <input
               type="text"
               required
@@ -139,7 +137,7 @@ export function SellPage() {
             />
           </div>
           <div>
-            <label className="font-body text-xs uppercase text-muted block mb-1">Email</label>
+            <label className="label-quiet block mb-1.5">Email</label>
             <input
               type="email"
               required
@@ -151,9 +149,7 @@ export function SellPage() {
           </div>
         </div>
         <div>
-          <label className="font-body text-xs uppercase text-muted block mb-1">
-            Phone (optional)
-          </label>
+          <label className="label-quiet block mb-1.5">Phone (optional)</label>
           <input
             type="tel"
             value={form.submitter_phone}
@@ -163,9 +159,9 @@ export function SellPage() {
           />
         </div>
 
-        <div className="grid sm:grid-cols-3 gap-3">
+        <div className="grid sm:grid-cols-3 gap-4">
           <div>
-            <label className="font-body text-xs uppercase text-muted block mb-1">Category</label>
+            <label className="label-quiet block mb-1.5">Category</label>
             <select
               required
               value={form.category}
@@ -174,14 +170,12 @@ export function SellPage() {
             >
               <option value="">Select</option>
               {CATEGORIES.map((c) => (
-                <option key={c} value={c}>
-                  {c}
-                </option>
+                <option key={c} value={c}>{c}</option>
               ))}
             </select>
           </div>
           <div>
-            <label className="font-body text-xs uppercase text-muted block mb-1">Size</label>
+            <label className="label-quiet block mb-1.5">Size</label>
             <select
               required
               value={form.size}
@@ -190,14 +184,12 @@ export function SellPage() {
             >
               <option value="">Select</option>
               {SIZES.map((s) => (
-                <option key={s} value={s}>
-                  {s}
-                </option>
+                <option key={s} value={s}>{s}</option>
               ))}
             </select>
           </div>
           <div>
-            <label className="font-body text-xs uppercase text-muted block mb-1">Condition</label>
+            <label className="label-quiet block mb-1.5">Condition</label>
             <select
               required
               value={form.condition}
@@ -206,18 +198,14 @@ export function SellPage() {
             >
               <option value="">Select</option>
               {CONDITIONS.map((c) => (
-                <option key={c} value={c}>
-                  {c}
-                </option>
+                <option key={c} value={c}>{c}</option>
               ))}
             </select>
           </div>
         </div>
 
         <div>
-          <label className="font-body text-xs uppercase text-muted block mb-1">
-            Asking price (₹)
-          </label>
+          <label className="label-quiet block mb-1.5">Asking price (₹)</label>
           <input
             type="number"
             required
@@ -231,15 +219,13 @@ export function SellPage() {
 
         {/* Photo upload */}
         <div>
-          <label className="font-body text-xs uppercase text-muted block mb-2">
-            Photos (up to 5)
-          </label>
+          <label className="label-quiet block mb-2">Photos (up to 5)</label>
           <div
             onClick={() => fileRef.current?.click()}
-            className="border-2 border-dashed border-ink p-6 text-center cursor-pointer hover:bg-bone-200 transition-colors"
+            className="border border-dashed border-hairline p-8 text-center cursor-pointer hover:bg-ivory-200 transition-colors"
           >
-            <Upload size={24} className="mx-auto mb-2 text-muted" />
-            <p className="font-body text-sm text-muted">
+            <Upload size={22} className="mx-auto mb-3 text-muted-light" />
+            <p className="label-quiet">
               {photos.length > 0
                 ? `${photos.length} photo${photos.length > 1 ? 's' : ''} selected`
                 : 'Click to upload photos of your item'}
@@ -256,14 +242,14 @@ export function SellPage() {
           {photoPreviews.length > 0 && (
             <div className="flex flex-wrap gap-2 mt-3">
               {photoPreviews.map((preview, i) => (
-                <div key={i} className="relative w-20 h-20 border-2 border-ink overflow-hidden">
+                <div key={i} className="relative w-20 h-20 overflow-hidden">
                   <img src={preview} alt="" className="w-full h-full object-cover" />
                   <button
                     type="button"
                     onClick={() => removePhoto(i)}
-                    className="absolute top-0 right-0 bg-ink text-bone p-0.5"
+                    className="absolute top-0 right-0 bg-ink text-ivory p-1"
                   >
-                    <X size={14} />
+                    <X size={12} />
                   </button>
                 </div>
               ))}
@@ -272,8 +258,8 @@ export function SellPage() {
         </div>
 
         {error && (
-          <div className="flex items-start gap-2 p-3 border-2 border-error bg-error/10 text-error font-body text-sm">
-            <AlertTriangle size={16} className="shrink-0 mt-0.5" />
+          <div className="flex items-start gap-2 p-3 text-error font-body text-sm">
+            <AlertTriangle size={15} className="shrink-0 mt-0.5" />
             {error}
           </div>
         )}
@@ -281,11 +267,11 @@ export function SellPage() {
         <button
           type="submit"
           disabled={submitting}
-          className="btn btn-primary w-full disabled:opacity-50 disabled:cursor-not-allowed"
+          className="btn btn-primary w-full disabled:opacity-40 disabled:cursor-not-allowed"
         >
           {submitting ? (
             <>
-              <Loader2 size={16} className="animate-spin" />
+              <Loader2 size={15} className="animate-spin" />
               Submitting...
             </>
           ) : (

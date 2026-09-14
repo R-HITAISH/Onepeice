@@ -8,45 +8,39 @@ export function ItemCard({ item }: { item: Item }) {
 
   return (
     <Link to={`/item/${item.id}`} className="block group">
-      <div className="card overflow-hidden relative">
-        <div className="aspect-[3/4] bg-bone-200 overflow-hidden relative">
+      <div className="card overflow-hidden">
+        <div className="aspect-[3/4] bg-ivory-200 overflow-hidden relative">
           <img
             src={item.photos[0] ?? ''}
             alt={item.name}
-            className={`w-full h-full object-cover transition-transform duration-300 group-hover:scale-105 ${
-              sold ? 'grayscale opacity-60' : ''
+            className={`w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03] ${
+              sold ? 'grayscale opacity-70' : ''
             }`}
             loading="lazy"
           />
-          <div className="absolute top-3 left-3">
-            <span className="tag tag-accent">1 of 1</span>
-          </div>
-          {sold && (
-            <div className="absolute inset-0 flex items-center justify-center">
-              <span className="stamp px-6 py-2 bg-ink text-bone text-xl rotate-[-12deg]">
-                Sold
-              </span>
-            </div>
-          )}
           {locked && !sold && (
             <div className="absolute top-3 right-3">
               <span className="tag tag-dark">Reserved</span>
             </div>
           )}
         </div>
-        <div className="p-4 border-t-2 border-ink">
-          <div className="flex items-start justify-between gap-2 mb-1">
-            <h3 className="font-body text-sm font-bold leading-tight line-clamp-2">{item.name}</h3>
-          </div>
+        <div className="pt-3 pb-1">
+          <h3 className="font-body text-sm text-ink leading-snug line-clamp-2 mb-1.5">{item.name}</h3>
           <div className="flex items-center gap-2 mb-3">
-            <span className="font-body text-xs text-muted uppercase">{item.size}</span>
-            <span className="font-body text-xs text-muted">·</span>
-            <span className="font-body text-xs text-muted uppercase">{item.condition}</span>
+            <span className="label-quiet">{item.size}</span>
+            <span className="text-hairline">·</span>
+            <span className="label-quiet">{item.condition}</span>
           </div>
-          <div className="flex items-center justify-between">
-            <span className="font-body text-lg font-bold">{formatINR(item.price_inr)}</span>
-            {item.brand && (
-              <span className="font-body text-xs text-muted uppercase">{item.brand}</span>
+          <div className="flex items-baseline justify-between gap-2">
+            <div className="flex items-baseline gap-2">
+              <span className="font-body text-sm font-medium text-ink">{formatINR(item.price_inr)}</span>
+              <span className="label-quiet">1 of 1</span>
+            </div>
+            {sold && (
+              <span className="tag tag-sold">Sold</span>
+            )}
+            {item.brand && !sold && (
+              <span className="label-quiet">{item.brand}</span>
             )}
           </div>
         </div>

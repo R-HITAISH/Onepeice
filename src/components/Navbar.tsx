@@ -17,19 +17,19 @@ export function Navbar() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 bg-ink border-b-2 border-ink">
+    <header className="sticky top-0 z-50 bg-ivory/95 backdrop-blur-sm border-b border-hairline">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <div className="flex items-center gap-8">
-            <Link to="/" className="font-display text-2xl uppercase tracking-tight text-bone leading-none">
+          <div className="flex items-center gap-10">
+            <Link to="/" className="font-display text-xl text-ink leading-none tracking-tight" style={{ fontWeight: 400 }}>
               Deadstock
             </Link>
-            <nav className="hidden md:flex items-center gap-6">
+            <nav className="hidden md:flex items-center gap-7">
               {navItems.map((item) => (
                 <Link
                   key={item.to}
                   to={item.to}
-                  className="font-body text-sm uppercase tracking-wider text-bone/70 hover:text-accent transition-colors"
+                  className="font-body text-sm text-muted hover:text-brass transition-colors"
                 >
                   {item.label}
                 </Link>
@@ -37,10 +37,10 @@ export function Navbar() {
             </nav>
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-5">
             <Link
               to={user ? '/account' : '/auth'}
-              className="hidden sm:flex items-center gap-1.5 font-body text-sm uppercase tracking-wider text-bone/70 hover:text-accent transition-colors"
+              className="hidden sm:flex items-center gap-1.5 font-body text-sm text-muted hover:text-brass transition-colors"
             >
               <User size={16} />
               {user ? 'Account' : 'Sign in'}
@@ -48,41 +48,41 @@ export function Navbar() {
             {user && (
               <button
                 onClick={() => signOut()}
-                className="hidden sm:flex items-center gap-1.5 font-body text-sm uppercase tracking-wider text-bone/70 hover:text-accent transition-colors"
+                className="hidden sm:flex items-center gap-1.5 font-body text-sm text-muted hover:text-brass transition-colors"
               >
                 <LogOut size={16} />
               </button>
             )}
             <Link
               to="/cart"
-              className="relative flex items-center gap-1.5 font-body text-sm uppercase tracking-wider text-bone hover:text-accent transition-colors"
+              className="relative flex items-center gap-1.5 font-body text-sm text-ink hover:text-brass transition-colors"
             >
-              <ShoppingBag size={20} />
+              <ShoppingBag size={18} />
               {itemCount > 0 && (
-                <span className="absolute -top-2 -right-2 bg-accent text-bone text-xs font-bold w-5 h-5 flex items-center justify-center border border-ink">
+                <span className="absolute -top-2 -right-2 bg-brass text-ivory text-[10px] font-medium w-4 h-4 flex items-center justify-center">
                   {itemCount}
                 </span>
               )}
             </Link>
             <button
-              className="md:hidden text-bone"
+              className="md:hidden text-ink"
               onClick={() => setMobileOpen(!mobileOpen)}
             >
-              {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+              {mobileOpen ? <X size={22} /> : <Menu size={22} />}
             </button>
           </div>
         </div>
       </div>
 
       {mobileOpen && (
-        <nav className="md:hidden bg-ink-800 border-t-2 border-ink animate-fade-in">
+        <nav className="md:hidden bg-ivory border-b border-hairline animate-fade-in">
           <div className="px-4 py-4 space-y-3">
             {navItems.map((item) => (
               <Link
                 key={item.to}
                 to={item.to}
                 onClick={() => setMobileOpen(false)}
-                className="block font-body text-sm uppercase tracking-wider text-bone/80 hover:text-accent"
+                className="block font-body text-sm text-muted hover:text-brass"
               >
                 {item.label}
               </Link>
@@ -90,7 +90,7 @@ export function Navbar() {
             <Link
               to={user ? '/account' : '/auth'}
               onClick={() => setMobileOpen(false)}
-              className="block font-body text-sm uppercase tracking-wider text-bone/80 hover:text-accent"
+              className="block font-body text-sm text-muted hover:text-brass"
             >
               {user ? 'Account' : 'Sign in'}
             </Link>
@@ -101,7 +101,7 @@ export function Navbar() {
                   setMobileOpen(false);
                   navigate('/');
                 }}
-                className="block font-body text-sm uppercase tracking-wider text-bone/80 hover:text-accent"
+                className="block font-body text-sm text-muted hover:text-brass"
               >
                 Sign out
               </button>

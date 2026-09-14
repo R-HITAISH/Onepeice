@@ -3,36 +3,36 @@ import { Instagram, Mail } from 'lucide-react';
 
 export function Footer() {
   return (
-    <footer className="bg-ink text-bone border-t-2 border-ink">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <footer className="bg-ink text-ivory">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
           <div>
-            <h3 className="font-display text-3xl uppercase mb-3">Deadstock</h3>
-            <p className="font-body text-sm text-bone/60 leading-relaxed">
+            <h3 className="font-display text-2xl mb-3" style={{ fontWeight: 400 }}>Deadstock</h3>
+            <p className="font-body text-sm text-ivory/50 leading-relaxed">
               One of one. Never restocked. Thrifted streetwear, resold with intent.
             </p>
           </div>
 
           <div>
-            <h4 className="font-body text-xs uppercase tracking-wider text-bone/50 mb-4">Navigate</h4>
-            <ul className="space-y-2">
+            <h4 className="label-quiet text-ivory/40 mb-4">Navigate</h4>
+            <ul className="space-y-2.5">
               <li>
-                <Link to="/shop" className="font-body text-sm text-bone/80 hover:text-accent transition-colors">
+                <Link to="/shop" className="font-body text-sm text-ivory/70 hover:text-brass-light transition-colors">
                   Shop the drop
                 </Link>
               </li>
               <li>
-                <Link to="/sell" className="font-body text-sm text-bone/80 hover:text-accent transition-colors">
+                <Link to="/sell" className="font-body text-sm text-ivory/70 hover:text-brass-light transition-colors">
                   Sell to us
                 </Link>
               </li>
               <li>
-                <Link to="/about" className="font-body text-sm text-bone/80 hover:text-accent transition-colors">
+                <Link to="/about" className="font-body text-sm text-ivory/70 hover:text-brass-light transition-colors">
                   About
                 </Link>
               </li>
               <li>
-                <Link to="/account" className="font-body text-sm text-bone/80 hover:text-accent transition-colors">
+                <Link to="/account" className="font-body text-sm text-ivory/70 hover:text-brass-light transition-colors">
                   Account
                 </Link>
               </li>
@@ -40,28 +40,28 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="font-body text-xs uppercase tracking-wider text-bone/50 mb-4">Contact</h4>
-            <div className="flex items-center gap-4">
+            <h4 className="label-quiet text-ivory/40 mb-4">Contact</h4>
+            <div className="flex items-center gap-5">
               <a
                 href="#"
-                className="flex items-center gap-2 font-body text-sm text-bone/80 hover:text-accent transition-colors"
+                className="flex items-center gap-2 font-body text-sm text-ivory/70 hover:text-brass-light transition-colors"
               >
-                <Instagram size={18} />
+                <Instagram size={16} />
                 @deadstock
               </a>
               <a
                 href="mailto:hey@deadstock.in"
-                className="flex items-center gap-2 font-body text-sm text-bone/80 hover:text-accent transition-colors"
+                className="flex items-center gap-2 font-body text-sm text-ivory/70 hover:text-brass-light transition-colors"
               >
-                <Mail size={18} />
+                <Mail size={16} />
                 hey@deadstock.in
               </a>
             </div>
           </div>
         </div>
 
-        <div className="mt-10 pt-6 border-t border-bone/10">
-          <p className="font-body text-xs text-bone/40 uppercase tracking-wider">
+        <div className="mt-12 pt-6 border-t border-ivory/10">
+          <p className="label-quiet text-ivory/30">
             © {new Date().getFullYear()} Deadstock. All items one-of-one. No restocks, no exceptions.
           </p>
         </div>

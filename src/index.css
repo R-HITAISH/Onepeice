@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Anton&family=Space+Mono:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Work+Sans:wght@300;400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -10,87 +10,92 @@
   }
 
   body {
-    background-color: #EDEBE4;
-    color: #121212;
-    font-family: 'Space Mono', monospace;
+    background-color: #F7F5F0;
+    color: #17181A;
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 400;
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   ::selection {
-    background-color: #FF4D00;
-    color: #EDEBE4;
+    background-color: #8A6D4E;
+    color: #F7F5F0;
   }
 
   ::-webkit-scrollbar {
-    width: 10px;
+    width: 6px;
   }
   ::-webkit-scrollbar-track {
-    background: #121212;
+    background: #F7F5F0;
   }
   ::-webkit-scrollbar-thumb {
-    background: #FF4D00;
-    border: 2px solid #121212;
+    background: #C4C0B6;
   }
 }
 
 @layer components {
   .btn {
-    @apply inline-flex items-center justify-center gap-2 px-6 py-3 font-body text-sm font-bold uppercase tracking-wider border-2 border-ink transition-all duration-150 cursor-pointer;
+    @apply inline-flex items-center justify-center gap-2 px-7 py-3.5 font-body text-sm font-medium transition-all duration-200 cursor-pointer;
   }
 
   .btn-primary {
-    @apply bg-accent text-bone border-ink shadow-hard hover:bg-accent-hover hover:shadow-hard-sm active:shadow-none active:translate-x-1.5 active:translate-y-1.5;
+    @apply bg-brass text-ivory shadow-soft hover:bg-brass-hover hover:shadow-soft-lg active:translate-y-px;
   }
 
   .btn-dark {
-    @apply bg-ink text-bone border-ink shadow-hard hover:bg-ink-700 hover:shadow-hard-sm active:shadow-none active:translate-x-1.5 active:translate-y-1.5;
+    @apply bg-ink text-ivory hover:bg-ink-700 transition-colors;
   }
 
   .btn-light {
-    @apply bg-bone text-ink border-ink shadow-hard hover:bg-bone-200 hover:shadow-hard-sm active:shadow-none active:translate-x-1.5 active:translate-y-1.5;
+    @apply bg-ivory-50 text-ink border border-hairline hover:bg-ivory-200 transition-colors;
   }
 
   .btn-ghost {
-    @apply bg-transparent text-ink border-ink hover:bg-ink hover:text-bone;
+    @apply bg-transparent text-ink hover:text-brass transition-colors;
   }
 
   .card {
-    @apply bg-bone border-2 border-ink shadow-hard transition-all duration-200 hover:shadow-hard-lg hover:-translate-y-1 hover:-translate-x-1;
+    @apply bg-ivory-50 transition-all duration-300 hover:shadow-soft;
   }
 
   .card-dark {
-    @apply bg-ink-800 border-2 border-ink shadow-hard-bone transition-all duration-200 hover:shadow-hard-lg hover:-translate-y-1 hover:-translate-x-1;
+    @apply bg-ink-800 text-ivory transition-all duration-300;
   }
 
   .tag {
-    @apply inline-block px-2 py-1 font-body text-xs font-bold uppercase tracking-wider border border-ink;
+    @apply inline-block px-2.5 py-1 font-body text-xs font-medium tracking-wide;
   }
 
-  .tag-accent {
-    @apply bg-accent text-bone border-ink;
+  .tag-sold {
+    @apply bg-brass text-ivory;
   }
 
   .tag-dark {
-    @apply bg-ink text-bone border-ink;
+    @apply bg-ink text-ivory;
   }
 
   .input-field {
-    @apply w-full bg-bone-50 border-2 border-ink px-4 py-3 font-body text-sm text-ink placeholder:text-muted focus:outline-none focus:border-accent transition-colors;
+    @apply w-full bg-ivory-50 border border-hairline px-4 py-3 font-body text-sm text-ink placeholder:text-muted-light focus:outline-none focus:border-brass transition-colors;
   }
 
   .filter-btn {
-    @apply px-4 py-2 font-body text-xs font-bold uppercase tracking-wider border-2 border-ink transition-all duration-150 cursor-pointer;
+    @apply px-4 py-2 font-body text-xs font-medium tracking-wide transition-all duration-150 cursor-pointer;
   }
 
   .filter-btn-active {
-    @apply bg-ink text-bone shadow-hard-sm;
+    @apply bg-ink text-ivory;
   }
 
   .filter-btn-inactive {
-    @apply bg-bone text-ink hover:bg-ink hover:text-bone;
+    @apply bg-ivory-50 text-ink border border-hairline hover:border-ink;
   }
 
-  .stamp {
-    @apply inline-flex items-center justify-center rounded-full border-[3px] border-ink font-display uppercase leading-none;
+  .label-quiet {
+    @apply font-body text-xs text-muted tracking-wide;
+  }
+
+  .divider {
+    @apply border-t border-hairline;
   }
 }

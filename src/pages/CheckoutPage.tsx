@@ -31,7 +31,6 @@ export function CheckoutPage() {
   const [error, setError] = useState<string | null>(null);
 
   const total = cartItems.reduce((sum, ci) => sum + ci.item.price_inr, 0);
-
   const validItems = cartItems.filter((ci) => new Date(ci.lock.expires_at) > new Date());
 
   useEffect(() => {
@@ -46,7 +45,6 @@ export function CheckoutPage() {
     setStep('processing');
 
     try {
-      // 1. Create order in DB
       const orderInsert: Record<string, unknown> = {
         status: 'pending',
         total_inr: total,
@@ -70,7 +68,6 @@ export function CheckoutPage() {
         throw new Error('Could not create order. Please try again.');
       }
 
-      // 2. Create order_items
       const orderItemsData = validItems.map((ci) => ({
         order_id: order.id,
         item_id: ci.item.id,
@@ -80,7 +77,6 @@ export function CheckoutPage() {
       const { error: oiErr } = await supabase.from('order_items').insert(orderItemsData);
       if (oiErr) throw new Error('Could not save order items.');
 
-      // 3. Create Razorpay order via edge function
       const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
       const anonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
@@ -104,7 +100,6 @@ export function CheckoutPage() {
       const razorpayData = await createRes.json();
       const razorpayOrderId = razorpayData.razorpay_order_id;
 
-      // 4. Save razorpay_order_id
       await supabase
         .from('orders')
         .update({ razorpay_order_id: razorpayOrderId })
@@ -112,7 +107,6 @@ export function CheckoutPage() {
 
       setOrderId(order.id);
 
-      // 5. Open Razorpay checkout
       if (!window.Razorpay) {
         throw new Error('Payment gateway not loaded. Check your connection and try again.');
       }
@@ -129,7 +123,6 @@ export function CheckoutPage() {
           contact: form.phone,
         },
         handler: async (response: any) => {
-          // 6. Verify payment server-side
           try {
             const verifyRes = await fetch(`${supabaseUrl}/functions/v1/razorpay-verify`, {
               method: 'POST',
@@ -180,23 +173,23 @@ export function CheckoutPage() {
   if (cartLoading) {
     return (
       <div className="max-w-2xl mx-auto px-4 py-12">
-        <Loader2 size={32} className="animate-spin text-muted" />
+        <Loader2 size={28} className="animate-spin text-muted" />
       </div>
     );
   }
 
   if (step === 'success') {
     return (
-      <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
-        <div className="inline-flex items-center justify-center w-20 h-20 border-2 border-ink bg-accent text-bone mb-6">
-          <Check size={40} />
+      <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center">
+        <div className="inline-flex items-center justify-center w-16 h-16 bg-brass text-ivory mb-6">
+          <Check size={32} />
         </div>
-        <h1 className="font-display text-5xl uppercase mb-3">Order confirmed</h1>
-        <p className="font-body text-sm text-muted mb-2">
+        <h1 className="font-display text-3xl mb-3" style={{ fontWeight: 400 }}>Order confirmed</h1>
+        <p className="label-quiet mb-2">
           Payment verified. Your items are marked sold — permanently.
         </p>
         {orderId && (
-          <p className="font-body text-xs text-muted mb-8">
+          <p className="label-quiet mb-8">
             Order ref: {orderId.slice(0, 8).toUpperCase()}
           </p>
         )}
@@ -215,45 +208,41 @@ export function CheckoutPage() {
   }
 
   return (
-    <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
+    <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-16">
       <Link
         to="/cart"
-        className="inline-flex items-center gap-2 font-body text-sm uppercase tracking-wider text-muted hover:text-accent mb-6 transition-colors"
+        className="inline-flex items-center gap-2 font-body text-sm text-muted hover:text-brass mb-8 transition-colors"
       >
-        <ArrowLeft size={16} />
+        <ArrowLeft size={15} />
         Back to bag
       </Link>
 
-      <h1 className="font-display text-5xl uppercase mb-8">Checkout</h1>
+      <h1 className="font-display text-4xl mb-10" style={{ fontWeight: 400 }}>Checkout</h1>
 
       {/* Order summary */}
-      <div className="border-2 border-ink p-4 mb-6 bg-bone-50">
-        <h3 className="font-body text-xs uppercase tracking-wider text-muted mb-3">
-          Order summary
-        </h3>
+      <div className="p-5 mb-8 bg-ivory-50 border border-hairline">
+        <h3 className="label-quiet mb-4">Order summary</h3>
         <div className="space-y-2">
           {validItems.map((ci) => (
             <div key={ci.lock.id} className="flex items-center justify-between text-sm">
-              <span className="font-body truncate pr-2">{ci.item.name}</span>
-              <span className="font-body font-bold whitespace-nowrap">
+              <span className="font-body text-ink/80 truncate pr-2">{ci.item.name}</span>
+              <span className="font-body font-medium whitespace-nowrap">
                 {formatINR(ci.item.price_inr)}
               </span>
             </div>
           ))}
-          <div className="flex items-center justify-between pt-2 border-t border-ink/20">
-            <span className="font-body text-sm uppercase font-bold">Total</span>
-            <span className="font-display text-2xl">{formatINR(total)}</span>
+          <div className="flex items-center justify-between pt-3 mt-2 border-t border-hairline">
+            <span className="font-body text-sm font-medium">Total</span>
+            <span className="font-display text-xl" style={{ fontWeight: 400 }}>{formatINR(total)}</span>
           </div>
         </div>
       </div>
 
       {/* Address form */}
-      <form onSubmit={handleCheckout} className="space-y-4">
-        <h3 className="font-body text-xs uppercase tracking-wider text-muted">
-          Shipping address
-        </h3>
+      <form onSubmit={handleCheckout} className="space-y-5">
+        <h3 className="label-quiet">Shipping address</h3>
         <div>
-          <label className="font-body text-xs uppercase text-muted block mb-1">Full name</label>
+          <label className="label-quiet block mb-1.5">Full name</label>
           <input
             type="text"
             required
@@ -264,7 +253,7 @@ export function CheckoutPage() {
           />
         </div>
         <div>
-          <label className="font-body text-xs uppercase text-muted block mb-1">Address</label>
+          <label className="label-quiet block mb-1.5">Address</label>
           <textarea
             required
             value={form.address}
@@ -275,7 +264,7 @@ export function CheckoutPage() {
         </div>
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <label className="font-body text-xs uppercase text-muted block mb-1">City</label>
+            <label className="label-quiet block mb-1.5">City</label>
             <input
               type="text"
               required
@@ -286,7 +275,7 @@ export function CheckoutPage() {
             />
           </div>
           <div>
-            <label className="font-body text-xs uppercase text-muted block mb-1">State</label>
+            <label className="label-quiet block mb-1.5">State</label>
             <input
               type="text"
               required
@@ -299,7 +288,7 @@ export function CheckoutPage() {
         </div>
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <label className="font-body text-xs uppercase text-muted block mb-1">Pincode</label>
+            <label className="label-quiet block mb-1.5">Pincode</label>
             <input
               type="text"
               required
@@ -311,7 +300,7 @@ export function CheckoutPage() {
             />
           </div>
           <div>
-            <label className="font-body text-xs uppercase text-muted block mb-1">Phone</label>
+            <label className="label-quiet block mb-1.5">Phone</label>
             <input
               type="tel"
               required
@@ -324,8 +313,8 @@ export function CheckoutPage() {
         </div>
 
         {error && (
-          <div className="flex items-start gap-2 p-3 border-2 border-error bg-error/10 text-error font-body text-sm">
-            <AlertTriangle size={16} className="shrink-0 mt-0.5" />
+          <div className="flex items-start gap-2 p-3 text-error font-body text-sm">
+            <AlertTriangle size={15} className="shrink-0 mt-0.5" />
             {error}
           </div>
         )}
@@ -333,11 +322,11 @@ export function CheckoutPage() {
         <button
           type="submit"
           disabled={step === 'processing' || validItems.length === 0}
-          className="btn btn-primary w-full disabled:opacity-50 disabled:cursor-not-allowed"
+          className="btn btn-primary w-full disabled:opacity-40 disabled:cursor-not-allowed"
         >
           {step === 'processing' ? (
             <>
-              <Loader2 size={16} className="animate-spin" />
+              <Loader2 size={15} className="animate-spin" />
               Processing...
             </>
           ) : (
@@ -346,7 +335,7 @@ export function CheckoutPage() {
         </button>
 
         {validItems.length === 0 && (
-          <p className="font-body text-xs text-error text-center">
+          <p className="label-quiet text-error text-center">
             All items in your bag have expired. Go back and add items again.
           </p>
         )}

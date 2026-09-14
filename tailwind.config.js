@@ -5,47 +5,44 @@ export default {
     extend: {
       colors: {
         ink: {
-          DEFAULT: '#121212',
-          900: '#121212',
-          800: '#1C1C1C',
-          700: '#262626',
+          DEFAULT: '#17181A',
+          900: '#17181A',
+          800: '#222326',
+          700: '#2E2F33',
         },
-        bone: {
-          DEFAULT: '#EDEBE4',
-          50: '#F5F4EF',
-          100: '#EDEBE4',
-          200: '#E0DDD4',
-          300: '#D3D0C5',
+        ivory: {
+          DEFAULT: '#F7F5F0',
+          50: '#FBFAF7',
+          100: '#F7F5F0',
+          200: '#F0EEE8',
+          300: '#E3E0D8',
         },
-        accent: {
-          DEFAULT: '#FF4D00',
-          hover: '#CC3D00',
-          light: '#FF6B2C',
+        brass: {
+          DEFAULT: '#8A6D4E',
+          hover: '#7A5E3F',
+          light: '#A08560',
         },
         muted: {
-          DEFAULT: '#6B6A63',
-          light: '#8C8B84',
-          dark: '#54534D',
+          DEFAULT: '#6B6B66',
+          light: '#8C8C86',
+          dark: '#545450',
         },
-        success: '#2E7D32',
-        warning: '#F9A825',
-        error: '#C62828',
+        hairline: '#E3E0D8',
+        success: '#4A6B4A',
+        warning: '#9A7B3A',
+        error: '#9A4A4A',
       },
       fontFamily: {
-        display: ['Anton', 'sans-serif'],
-        body: ['Space Mono', 'monospace'],
+        display: ['Fraunces', 'serif'],
+        body: ['Work Sans', 'sans-serif'],
       },
       boxShadow: {
-        hard: '6px 6px 0 #121212',
-        'hard-sm': '4px 4px 0 #121212',
-        'hard-lg': '8px 8px 0 #121212',
-        'hard-accent': '6px 6px 0 #FF4D00',
-        'hard-bone': '6px 6px 0 #EDEBE4',
+        soft: '0 2px 12px rgba(23, 24, 26, 0.08)',
+        'soft-lg': '0 4px 20px rgba(23, 24, 26, 0.10)',
       },
       animation: {
-        'fade-in': 'fadeIn 0.4s ease-out',
-        'slide-up': 'slideUp 0.5s ease-out',
-        'stamp-in': 'stampIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)',
+        'fade-in': 'fadeIn 0.5s ease-out',
+        'slide-up': 'slideUp 0.6s ease-out',
       },
       keyframes: {
         fadeIn: {
@@ -53,12 +50,8 @@ export default {
           '100%': { opacity: '1' },
         },
         slideUp: {
-          '0%': { opacity: '0', transform: 'translateY(20px)' },
+          '0%': { opacity: '0', transform: 'translateY(16px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' },
-        },
-        stampIn: {
-          '0%': { opacity: '0', transform: 'scale(0.5) rotate(-25deg)' },
-          '100%': { opacity: '1', transform: 'scale(1) rotate(-12deg)' },
         },
       },
     },

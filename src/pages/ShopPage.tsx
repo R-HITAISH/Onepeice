@@ -51,7 +51,7 @@ export function ShopPage() {
     onChange: (v: string | null) => void;
   }) => (
     <div className="mb-6">
-      <h4 className="font-body text-xs uppercase tracking-wider text-muted mb-3">{title}</h4>
+      <h4 className="label-quiet mb-3">{title}</h4>
       <div className="flex flex-wrap gap-2">
         {options.map((opt) => (
           <button
@@ -67,34 +67,32 @@ export function ShopPage() {
   );
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
-      <div className="mb-8">
-        <p className="font-body text-xs uppercase tracking-widest text-muted mb-2">
-          All available stock
-        </p>
-        <h1 className="font-display text-5xl md:text-6xl uppercase">Shop the drop</h1>
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-16">
+      <div className="mb-10">
+        <p className="label-quiet mb-2">All available stock</p>
+        <h1 className="font-display text-4xl md:text-5xl" style={{ fontWeight: 400 }}>Shop the drop</h1>
       </div>
 
       {/* Sort bar */}
-      <div className="flex items-center justify-between mb-6 pb-4 border-b-2 border-ink">
+      <div className="flex items-center justify-between mb-6 pb-4 divider">
         <button
           onClick={() => setFiltersOpen(!filtersOpen)}
-          className="flex items-center gap-2 font-body text-sm uppercase tracking-wider hover:text-accent transition-colors"
+          className="flex items-center gap-2 font-body text-sm text-ink hover:text-brass transition-colors"
         >
-          <SlidersHorizontal size={16} />
+          <SlidersHorizontal size={15} />
           Filters
           {activeFilterCount > 0 && (
-            <span className="bg-accent text-bone text-xs px-1.5 py-0.5 border border-ink">
+            <span className="bg-brass text-ivory text-[10px] px-1.5 py-0.5">
               {activeFilterCount}
             </span>
           )}
         </button>
         <div className="flex items-center gap-2">
-          <span className="font-body text-xs uppercase tracking-wider text-muted">Sort</span>
+          <span className="label-quiet">Sort</span>
           <select
             value={sort}
             onChange={(e) => setSort(e.target.value as typeof sort)}
-            className="font-body text-sm border-2 border-ink bg-bone px-3 py-1.5 focus:outline-none focus:border-accent"
+            className="font-body text-sm border border-hairline bg-ivory-50 px-3 py-1.5 focus:outline-none focus:border-brass transition-colors"
           >
             <option value="newest">Newest</option>
             <option value="price-low">Price: Low to High</option>
@@ -105,20 +103,20 @@ export function ShopPage() {
 
       {/* Filters */}
       {filtersOpen && (
-        <div className="mb-8 p-6 bg-bone-50 border-2 border-ink shadow-hard animate-fade-in">
+        <div className="mb-10 p-6 bg-ivory-50 border border-hairline animate-fade-in">
           <div className="flex items-center justify-between mb-6">
-            <h3 className="font-display text-xl uppercase">Filter</h3>
+            <h3 className="font-display text-lg" style={{ fontWeight: 400 }}>Filter</h3>
             <div className="flex items-center gap-3">
               {activeFilterCount > 0 && (
                 <button
                   onClick={clearFilters}
-                  className="font-body text-xs uppercase tracking-wider text-muted hover:text-accent"
+                  className="label-quiet hover:text-brass"
                 >
                   Clear all
                 </button>
               )}
-              <button onClick={() => setFiltersOpen(false)} className="text-ink hover:text-accent">
-                <X size={20} />
+              <button onClick={() => setFiltersOpen(false)} className="text-ink hover:text-brass">
+                <X size={18} />
               </button>
             </div>
           </div>
@@ -130,15 +128,15 @@ export function ShopPage() {
 
       {/* Grid */}
       {loading ? (
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
           {Array.from({ length: 8 }).map((_, i) => (
-            <div key={i} className="aspect-[3/4] bg-bone-200 border-2 border-ink animate-pulse" />
+            <div key={i} className="aspect-[3/4] bg-ivory-200 animate-pulse" />
           ))}
         </div>
       ) : items.length === 0 ? (
-        <div className="text-center py-20">
-          <p className="font-display text-3xl uppercase mb-2">Nothing matches</p>
-          <p className="font-body text-sm text-muted mb-6">
+        <div className="text-center py-24">
+          <p className="font-display text-2xl mb-2" style={{ fontWeight: 400 }}>Nothing matches</p>
+          <p className="label-quiet mb-6">
             Try clearing your filters or check back when the next drop lands.
           </p>
           {activeFilterCount > 0 && (
@@ -149,10 +147,10 @@ export function ShopPage() {
         </div>
       ) : (
         <>
-          <p className="font-body text-xs uppercase tracking-wider text-muted mb-4">
+          <p className="label-quiet mb-6">
             {items.length} {items.length === 1 ? 'item' : 'items'} available
           </p>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
             {items.map((item) => (
               <ItemCard key={item.id} item={item} />
             ))}
