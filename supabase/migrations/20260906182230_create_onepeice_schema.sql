@@ -1,8 +1,8 @@
 /*
-# DEADSTOCK — Full Schema Setup
+# ONEPEICE — Full Schema Setup
 
 ## Overview
-Creates the complete database schema for DEADSTOCK, a one-of-one streetwear resale platform.
+Creates the complete database schema for ONEPEICE, a one-of-one streetwear resale platform.
 Includes items, cart_locks (with critical unique partial index), orders, order_items,
 and sell_submissions tables. Also sets up RLS policies, a trigger to auto-sync item
 status with cart_lock status, a storage bucket for sell submission photos, and seed data.
