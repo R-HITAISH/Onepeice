@@ -7,7 +7,7 @@ export function AboutPage() {
       {/* Hero */}
       <section className="bg-ink text-ivory py-24 md:py-32">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="label-quiet text-brass-light mb-6">About Onepeice</p>
+          <p className="label-quiet text-brass-light mb-6">About Onepiece</p>
           <h1 className="font-display text-4xl md:text-6xl leading-[1.1] max-w-2xl" style={{ fontWeight: 300 }}>
             We don't sell clothes.
             <br />
@@ -21,7 +21,7 @@ export function AboutPage() {
         <div className="grid md:grid-cols-3 gap-12 md:gap-16">
           <div className="md:col-span-2 space-y-6">
             <p className="font-body text-base leading-relaxed text-ink/80">
-              Onepeice started in a damp basement in Pune with three garbage bags of old
+              Onepiece started in a damp basement in Pune with three garbage bags of old
               clothes and a camera phone. No investors, no warehouse, no supply chain. Just
               one question: why does every resale platform look like a luxury boutique when
               the clothes come from a thrift rack?

@@ -7,7 +7,7 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
           <div>
-            <h3 className="font-display text-2xl mb-3" style={{ fontWeight: 400 }}>Onepeice</h3>
+            <h3 className="font-display text-2xl mb-3" style={{ fontWeight: 400 }}>Onepiece</h3>
             <p className="font-body text-sm text-ivory/50 leading-relaxed">
               One of one. Never restocked. Thrifted streetwear, resold with intent.
             </p>
@@ -47,14 +47,14 @@ export function Footer() {
                 className="flex items-center gap-2 font-body text-sm text-ivory/70 hover:text-brass-light transition-colors"
               >
                 <Instagram size={16} />
-                @onepeice
+                @onepiece
               </a>
               <a
-                href="mailto:hey@onepeice.in"
+                href="mailto:hey@onepiece.in"
                 className="flex items-center gap-2 font-body text-sm text-ivory/70 hover:text-brass-light transition-colors"
               >
                 <Mail size={16} />
-                hey@onepeice.in
+                hey@onepiece.in
               </a>
             </div>
           </div>
@@ -62,7 +62,7 @@ export function Footer() {
 
         <div className="mt-12 pt-6 border-t border-ivory/10">
           <p className="label-quiet text-ivory/30">
-            © {new Date().getFullYear()} Onepeice. All items one-of-one. No restocks, no exceptions.
+            © {new Date().getFullYear()} Onepiece. All items one-of-one. No restocks, no exceptions.
           </p>
         </div>
       </div>
