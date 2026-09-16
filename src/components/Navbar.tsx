@@ -22,7 +22,7 @@ export function Navbar() {
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center gap-10">
             <Link to="/" className="font-display text-xl text-ink leading-none tracking-tight" style={{ fontWeight: 400 }}>
-              Deadstock
+              Onepeice
             </Link>
             <nav className="hidden md:flex items-center gap-7">
               {navItems.map((item) => (

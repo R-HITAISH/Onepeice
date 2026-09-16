@@ -43,7 +43,7 @@ Deno.serve(async (req: Request) => {
         amount: amount,
         currency: 'INR',
         receipt: order_id,
-        notes: { deadstock_order_id: order_id },
+        notes: { onepeice_order_id: order_id },
       }),
     });
 

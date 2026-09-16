@@ -36,7 +36,7 @@ export function HomePage() {
               Never restocked.
             </h1>
             <p className="font-body text-base text-ivory/50 max-w-lg mb-10 leading-relaxed">
-              Every piece on Deadstock is a single physical unit. When it sells, it's gone
+              Every piece on Onepeice is a single physical unit. When it sells, it's gone
               for good. No restocks, no reproductions, no lies.
             </p>
             <div className="flex flex-wrap gap-4">
