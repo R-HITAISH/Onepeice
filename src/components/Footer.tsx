@@ -60,10 +60,21 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 pt-6 border-t border-ivory/10">
+        <div className="mt-12 pt-6 border-t border-ivory/10 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="label-quiet text-ivory/30">
             © {new Date().getFullYear()} Onepiece. All items one-of-one. No restocks, no exceptions.
           </p>
+          <div className="flex items-center gap-5">
+            <Link to="/terms" className="label-quiet text-ivory/30 hover:text-brass-light transition-colors">
+              Terms
+            </Link>
+            <Link to="/privacy" className="label-quiet text-ivory/30 hover:text-brass-light transition-colors">
+              Privacy
+            </Link>
+            <Link to="/refund-shipping" className="label-quiet text-ivory/30 hover:text-brass-light transition-colors">
+              Refunds &amp; Shipping
+            </Link>
+          </div>
         </div>
       </div>
     </footer>

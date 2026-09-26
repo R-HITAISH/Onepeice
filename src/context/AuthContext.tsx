@@ -1,13 +1,18 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
 import type { Session, User } from '@supabase/supabase-js';
 import { supabase } from '@/lib/supabase';
+import { sendOTP as sendOTPService, verifyOTP as verifyOTPService } from '@/services/otpService';
 
 type AuthContextValue = {
   session: Session | null;
   user: User | null;
   loading: boolean;
-  signIn: (email: string, password: string) => Promise<{ error: string | null }>;
-  signUp: (email: string, password: string) => Promise<{ error: string | null }>;
+  phone: string;
+  otpSent: boolean;
+  otpLoading: boolean;
+  sendOTP: (phoneNumber: string) => Promise<{ error: string | null }>;
+  verifyOTP: (otp: string) => Promise<{ error: string | null }>;
+  resetOTP: () => void;
   signInWithGoogle: () => Promise<{ error: string | null }>;
   signOut: () => Promise<void>;
 };
@@ -17,6 +22,9 @@ const AuthContext = createContext<AuthContextValue | undefined>(undefined);
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
+  const [phone, setPhone] = useState('');
+  const [otpSent, setOtpSent] = useState(false);
+  const [otpLoading, setOtpLoading] = useState(false);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
@@ -32,14 +40,27 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return () => listener.subscription.unsubscribe();
   }, []);
 
-  const signIn = async (email: string, password: string) => {
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
-    return { error: error?.message ?? null };
+  const sendOTP = async (phoneNumber: string) => {
+    setOtpLoading(true);
+    const result = await sendOTPService(phoneNumber);
+    setOtpLoading(false);
+    if (!result.error) {
+      setPhone(phoneNumber);
+      setOtpSent(true);
+    }
+    return result;
   };
 
-  const signUp = async (email: string, password: string) => {
-    const { error } = await supabase.auth.signUp({ email, password });
-    return { error: error?.message ?? null };
+  const verifyOTP = async (otp: string) => {
+    setOtpLoading(true);
+    const result = await verifyOTPService(phone, otp);
+    setOtpLoading(false);
+    return result;
+  };
+
+  const resetOTP = () => {
+    setOtpSent(false);
+    setPhone('');
   };
 
   const signInWithGoogle = async () => {
@@ -52,11 +73,24 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const signOut = async () => {
     await supabase.auth.signOut();
+    resetOTP();
   };
 
   return (
     <AuthContext.Provider
-      value={{ session, user: session?.user ?? null, loading, signIn, signUp, signInWithGoogle, signOut }}
+      value={{
+        session,
+        user: session?.user ?? null,
+        loading,
+        phone,
+        otpSent,
+        otpLoading,
+        sendOTP,
+        verifyOTP,
+        resetOTP,
+        signInWithGoogle,
+        signOut,
+      }}
     >
       {children}
     </AuthContext.Provider>

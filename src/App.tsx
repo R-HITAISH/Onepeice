@@ -12,6 +12,9 @@ import { SellPage } from '@/pages/SellPage';
 import { AboutPage } from '@/pages/AboutPage';
 import { AuthPage } from '@/pages/AuthPage';
 import { AccountPage } from '@/pages/AccountPage';
+import { TermsPage } from '@/pages/legal/TermsPage';
+import { PrivacyPage } from '@/pages/legal/PrivacyPage';
+import { RefundShippingPage } from '@/pages/legal/RefundShippingPage';
 
 function Routes() {
   const { path } = useRouter();
@@ -26,6 +29,9 @@ function Routes() {
   else if (path === '/about') page = <AboutPage />;
   else if (path === '/auth') page = <AuthPage />;
   else if (path === '/account') page = <AccountPage />;
+  else if (path === '/terms') page = <TermsPage />;
+  else if (path === '/privacy') page = <PrivacyPage />;
+  else if (path === '/refund-shipping') page = <RefundShippingPage />;
   else page = <HomePage />;
 
   return (

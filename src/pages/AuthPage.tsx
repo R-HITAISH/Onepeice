@@ -1,29 +1,46 @@
 import { useState } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import { Link, useRouter } from '@/router/Router';
-import { AlertTriangle, Loader2 } from 'lucide-react';
+import { AlertTriangle, Loader2, ArrowLeft, Phone } from 'lucide-react';
+import { validateIndianPhone } from '@/services/otpService';
 
 export function AuthPage() {
-  const { signIn, signUp, signInWithGoogle } = useAuth();
+  const { otpSent, otpLoading, sendOTP, verifyOTP, resetOTP, signInWithGoogle } = useAuth();
   const { navigate } = useRouter();
-  const [mode, setMode] = useState<'signin' | 'signup'>('signin');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [phoneInput, setPhoneInput] = useState('');
+  const [otpInput, setOtpInput] = useState('');
   const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
   const [googleLoading, setGoogleLoading] = useState(false);
+  const [resendCooldown, setResendCooldown] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSendOTP = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
-    setLoading(true);
-    const result = mode === 'signin' ? await signIn(email, password) : await signUp(email, password);
-    setLoading(false);
+    if (!validateIndianPhone(phoneInput)) {
+      setError('Enter a valid 10-digit Indian mobile number.');
+      return;
+    }
+    const result = await sendOTP(phoneInput);
+    if (result.error) setError(result.error);
+  };
+
+  const handleVerifyOTP = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+    const result = await verifyOTP(otpInput);
     if (result.error) {
       setError(result.error);
     } else {
       navigate('/account');
     }
+  };
+
+  const handleResend = async () => {
+    setError(null);
+    setResendCooldown(true);
+    setTimeout(() => setResendCooldown(false), 30000);
+    const result = await sendOTP(phoneInput);
+    if (result.error) setError(result.error);
   };
 
   const handleGoogle = async () => {
@@ -36,73 +53,133 @@ export function AuthPage() {
     }
   };
 
+  const formattedPhone = phoneInput
+    ? `+91 ${phoneInput.replace(/\D/g, '').slice(-10).replace(/(\d{5})(\d{5})/, '$1 $2')}`
+    : '';
+
   return (
     <div className="max-w-md mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
       <h1 className="font-display text-4xl mb-2" style={{ fontWeight: 400 }}>
-        {mode === 'signin' ? 'Sign in' : 'Create account'}
+        {otpSent ? 'Verify your number' : 'Sign in'}
       </h1>
       <p className="label-quiet mb-10">
-        {mode === 'signin'
-          ? 'Access your order history and saved items.'
-          : 'Start buying and tracking one-of-one pieces.'}
+        {otpSent
+          ? `OTP sent to ${formattedPhone}`
+          : 'Enter your mobile number to get a one-time password.'}
       </p>
 
-      <form onSubmit={handleSubmit} className="space-y-5">
-        <div>
-          <label className="label-quiet block mb-1.5">Email</label>
-          <input
-            type="email"
-            required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="input-field"
-            placeholder="you@email.com"
-          />
-        </div>
-        <div>
-          <label className="label-quiet block mb-1.5">Password</label>
-          <input
-            type="password"
-            required
-            minLength={6}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="input-field"
-            placeholder="At least 6 characters"
-          />
-        </div>
-
-        {error && (
-          <div className="flex items-start gap-2 p-3 text-error font-body text-sm">
-            <AlertTriangle size={15} className="shrink-0 mt-0.5" />
-            {error}
+      {!otpSent ? (
+        <form onSubmit={handleSendOTP} className="space-y-5">
+          <div>
+            <label className="label-quiet block mb-1.5">Mobile number</label>
+            <div className="relative">
+              <span className="absolute left-4 top-1/2 -translate-y-1/2 font-body text-sm text-muted pointer-events-none">
+                +91
+              </span>
+              <input
+                type="tel"
+                required
+                maxLength={10}
+                value={phoneInput}
+                onChange={(e) => setPhoneInput(e.target.value.replace(/\D/g, '').slice(0, 10))}
+                className="input-field pl-12"
+                placeholder="9876543210"
+                inputMode="numeric"
+              />
+            </div>
           </div>
-        )}
 
-        <button
-          type="submit"
-          disabled={loading}
-          className="btn btn-primary w-full disabled:opacity-40 disabled:cursor-not-allowed"
-        >
-          {loading ? (
-            <>
-              <Loader2 size={15} className="animate-spin" />
-              {mode === 'signin' ? 'Signing in...' : 'Creating...'}
-            </>
-          ) : mode === 'signin' ? (
-            'Sign in'
-          ) : (
-            'Create account'
+          {error && (
+            <div className="flex items-start gap-2 p-3 text-error font-body text-sm">
+              <AlertTriangle size={15} className="shrink-0 mt-0.5" />
+              {error}
+            </div>
           )}
-        </button>
-      </form>
+
+          <button
+            type="submit"
+            disabled={otpLoading || phoneInput.length !== 10}
+            className="btn btn-primary w-full disabled:opacity-40 disabled:cursor-not-allowed"
+          >
+            {otpLoading ? (
+              <>
+                <Loader2 size={15} className="animate-spin" />
+                Sending OTP...
+              </>
+            ) : (
+              <>
+                <Phone size={15} />
+                Send OTP
+              </>
+            )}
+          </button>
+        </form>
+      ) : (
+        <form onSubmit={handleVerifyOTP} className="space-y-5">
+          <div>
+            <label className="label-quiet block mb-1.5">6-digit code</label>
+            <input
+              type="text"
+              required
+              maxLength={6}
+              value={otpInput}
+              onChange={(e) => setOtpInput(e.target.value.replace(/\D/g, '').slice(0, 6))}
+              className="input-field text-center text-2xl tracking-[0.5em] font-display"
+              placeholder="------"
+              inputMode="numeric"
+              autoFocus
+            />
+          </div>
+
+          {error && (
+            <div className="flex items-start gap-2 p-3 text-error font-body text-sm">
+              <AlertTriangle size={15} className="shrink-0 mt-0.5" />
+              {error}
+            </div>
+          )}
+
+          <button
+            type="submit"
+            disabled={otpLoading || otpInput.length !== 6}
+            className="btn btn-primary w-full disabled:opacity-40 disabled:cursor-not-allowed"
+          >
+            {otpLoading ? (
+              <>
+                <Loader2 size={15} className="animate-spin" />
+                Verifying...
+              </>
+            ) : (
+              'Verify & sign in'
+            )}
+          </button>
+
+          <div className="flex items-center justify-between pt-1">
+            <button
+              type="button"
+              onClick={handleResend}
+              disabled={resendCooldown}
+              className="font-body text-xs text-brass hover:underline disabled:text-muted disabled:no-underline"
+            >
+              {resendCooldown ? 'Resend in 30s' : 'Resend OTP'}
+            </button>
+            <button
+              type="button"
+              onClick={() => { resetOTP(); setOtpInput(''); setError(null); }}
+              className="flex items-center gap-1.5 font-body text-xs text-muted hover:text-brass transition-colors"
+            >
+              <ArrowLeft size={13} />
+              Change number
+            </button>
+          </div>
+        </form>
+      )}
 
       <div className="relative my-8">
         <div className="absolute inset-0 flex items-center">
           <div className="w-full border-t border-hairline" />
         </div>
         <div className="relative flex justify-center">
-          <span className="bg-ivory px-4 label-quiet">or</span>
+          <span className="bg-bone px-4 label-quiet">or</span>
         </div>
       </div>
 
@@ -124,30 +201,6 @@ export function AuthPage() {
         )}
         Continue with Google
       </button>
-
-      <div className="mt-8 text-center">
-        {mode === 'signin' ? (
-          <p className="label-quiet">
-            No account?{' '}
-            <button
-              onClick={() => { setMode('signup'); setError(null); }}
-              className="text-brass hover:underline"
-            >
-              Create one
-            </button>
-          </p>
-        ) : (
-          <p className="label-quiet">
-            Already have an account?{' '}
-            <button
-              onClick={() => { setMode('signin'); setError(null); }}
-              className="text-brass hover:underline"
-            >
-              Sign in
-            </button>
-          </p>
-        )}
-      </div>
 
       <div className="mt-10 text-center">
         <Link to="/" className="label-quiet hover:text-brass">
