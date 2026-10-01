@@ -8,8 +8,8 @@ export function ItemCard({ item }: { item: Item }) {
 
   return (
     <Link to={`/item/${item.id}`} className="block group">
-      <div className="card overflow-hidden">
-        <div className="aspect-[3/4] bg-ivory-200 overflow-hidden relative">
+      <div className="card p-5 animate-fade-in">
+        <div className="aspect-[3/4] bg-ink-700 overflow-hidden relative mb-4">
           <img
             src={item.photos[0] ?? ''}
             alt={item.name}
@@ -24,25 +24,16 @@ export function ItemCard({ item }: { item: Item }) {
             </div>
           )}
         </div>
-        <div className="pt-3 pb-1">
-          <h3 className="font-body text-sm text-ink leading-snug line-clamp-2 mb-1.5">{item.name}</h3>
-          <div className="flex items-center gap-2 mb-3">
-            <span className="label-quiet">{item.size}</span>
-            <span className="text-hairline">·</span>
-            <span className="label-quiet">{item.condition}</span>
-          </div>
-          <div className="flex items-baseline justify-between gap-2">
-            <div className="flex items-baseline gap-2">
-              <span className="font-body text-sm font-medium text-ink">{formatINR(item.price_inr)}</span>
-              <span className="label-quiet">1 of 1</span>
-            </div>
-            {sold && (
-              <span className="tag tag-sold">Sold</span>
-            )}
-            {item.brand && !sold && (
-              <span className="label-quiet">{item.brand}</span>
-            )}
-          </div>
+        <h3 className="font-display text-sm text-ivory uppercase tracking-wide mb-2 line-clamp-2">
+          {item.name}
+        </h3>
+        <p className="tag-one-of-one mb-2">1 of 1</p>
+        <div className="flex items-baseline justify-between gap-2">
+          <span className="font-body text-sm text-grey-light">{formatINR(item.price_inr)}</span>
+          {sold && <span className="tag tag-sold">Sold</span>}
+          {item.brand && !sold && (
+            <span className="font-body text-[11px] text-grey-medium uppercase tracking-wide">{item.brand}</span>
+          )}
         </div>
       </div>
     </Link>

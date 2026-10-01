@@ -77,7 +77,7 @@ export function ShopPage() {
       <div className="flex items-center justify-between mb-6 pb-4 divider">
         <button
           onClick={() => setFiltersOpen(!filtersOpen)}
-          className="flex items-center gap-2 font-body text-sm text-ink hover:text-brass transition-colors"
+          className="flex items-center gap-2 font-body text-sm text-ivory hover:text-brass transition-colors"
         >
           <SlidersHorizontal size={15} />
           Filters
@@ -92,7 +92,7 @@ export function ShopPage() {
           <select
             value={sort}
             onChange={(e) => setSort(e.target.value as typeof sort)}
-            className="font-body text-sm border border-hairline bg-ivory-50 px-3 py-1.5 focus:outline-none focus:border-brass transition-colors"
+            className="font-body text-sm border border-grey-dark bg-ink-800 px-3 py-1.5 focus:outline-none focus:border-brass transition-colors"
           >
             <option value="newest">Newest</option>
             <option value="price-low">Price: Low to High</option>
@@ -103,7 +103,7 @@ export function ShopPage() {
 
       {/* Filters */}
       {filtersOpen && (
-        <div className="mb-10 p-6 bg-ivory-50 border border-hairline animate-fade-in">
+        <div className="mb-10 p-6 bg-ink-800 border border-grey-dark animate-fade-in">
           <div className="flex items-center justify-between mb-6">
             <h3 className="font-display text-lg" style={{ fontWeight: 400 }}>Filter</h3>
             <div className="flex items-center gap-3">
@@ -115,7 +115,7 @@ export function ShopPage() {
                   Clear all
                 </button>
               )}
-              <button onClick={() => setFiltersOpen(false)} className="text-ink hover:text-brass">
+              <button onClick={() => setFiltersOpen(false)} className="text-ivory hover:text-brass">
                 <X size={18} />
               </button>
             </div>
@@ -130,7 +130,7 @@ export function ShopPage() {
       {loading ? (
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
           {Array.from({ length: 8 }).map((_, i) => (
-            <div key={i} className="aspect-[3/4] bg-ivory-200 animate-pulse" />
+            <div key={i} className="aspect-[3/4] bg-ink-700 animate-pulse" />
           ))}
         </div>
       ) : items.length === 0 ? (

@@ -35,7 +35,7 @@ function Routes() {
   else page = <HomePage />;
 
   return (
-    <div className="min-h-screen flex flex-col bg-bone">
+    <div className="min-h-screen flex flex-col bg-ink">
       <Navbar />
       <main className="flex-1">{page}</main>
       <Footer />

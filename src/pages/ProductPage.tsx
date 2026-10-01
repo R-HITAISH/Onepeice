@@ -62,11 +62,11 @@ export function ProductPage({ itemId }: { itemId: string }) {
     return (
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid md:grid-cols-2 gap-12">
-          <div className="aspect-[3/4] bg-ivory-200 animate-pulse" />
+          <div className="aspect-[3/4] bg-ink-700 animate-pulse" />
           <div className="space-y-4">
-            <div className="h-8 bg-ivory-200 animate-pulse w-3/4" />
-            <div className="h-6 bg-ivory-200 animate-pulse w-1/2" />
-            <div className="h-32 bg-ivory-200 animate-pulse" />
+            <div className="h-8 bg-ink-700 animate-pulse w-3/4" />
+            <div className="h-6 bg-ink-700 animate-pulse w-1/2" />
+            <div className="h-32 bg-ink-700 animate-pulse" />
           </div>
         </div>
       </div>
@@ -94,7 +94,7 @@ export function ProductPage({ itemId }: { itemId: string }) {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
       <Link
         to="/shop"
-        className="inline-flex items-center gap-2 font-body text-sm text-muted hover:text-brass mb-8 transition-colors"
+        className="inline-flex items-center gap-2 font-body text-sm text-grey-light hover:text-brass mb-8 transition-colors"
       >
         <ArrowLeft size={15} />
         Back to shop
@@ -103,7 +103,7 @@ export function ProductPage({ itemId }: { itemId: string }) {
       <div className="grid md:grid-cols-2 gap-10 lg:gap-16">
         {/* Photos */}
         <div>
-          <div className="aspect-[3/4] bg-ivory-200 overflow-hidden relative">
+          <div className="aspect-[3/4] bg-ink-700 overflow-hidden relative">
             <img
               src={item.photos[activePhoto] ?? item.photos[0] ?? ''}
               alt={item.name}
@@ -122,7 +122,7 @@ export function ProductPage({ itemId }: { itemId: string }) {
                   key={i}
                   onClick={() => setActivePhoto(i)}
                   className={`w-20 h-20 overflow-hidden border transition-colors ${
-                    i === activePhoto ? 'border-brass' : 'border-hairline hover:border-ink'
+                    i === activePhoto ? 'border-brass' : 'border-grey-dark hover:border-ink'
                   }`}
                 >
                   <img src={photo} alt="" className="w-full h-full object-cover" />
@@ -152,12 +152,12 @@ export function ProductPage({ itemId }: { itemId: string }) {
             )}
           </div>
 
-          <div className="grid grid-cols-3 gap-0 mb-8 border-t border-b border-hairline">
-            <div className="py-4 pr-4 border-r border-hairline">
+          <div className="grid grid-cols-3 gap-0 mb-8 border-t border-b border-grey-dark">
+            <div className="py-4 pr-4 border-r border-grey-dark">
               <p className="label-quiet mb-1">Size</p>
               <p className="font-body text-sm">{item.size}</p>
             </div>
-            <div className="py-4 px-4 border-r border-hairline">
+            <div className="py-4 px-4 border-r border-grey-dark">
               <p className="label-quiet mb-1">Category</p>
               <p className="font-body text-sm">{item.category}</p>
             </div>
@@ -170,14 +170,14 @@ export function ProductPage({ itemId }: { itemId: string }) {
           {item.description && (
             <div className="mb-8">
               <h3 className="label-quiet mb-2">Description</h3>
-              <p className="font-body text-sm leading-relaxed text-ink/80">{item.description}</p>
+              <p className="font-body text-sm leading-relaxed text-ivory/80">{item.description}</p>
             </div>
           )}
 
           {item.measurements && (
             <div className="mb-8">
               <h3 className="label-quiet mb-2">Measurements</h3>
-              <p className="font-body text-sm leading-relaxed text-ink/80">{item.measurements}</p>
+              <p className="font-body text-sm leading-relaxed text-ivory/80">{item.measurements}</p>
             </div>
           )}
 

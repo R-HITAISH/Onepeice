@@ -20,10 +20,10 @@ export function CartPage() {
   if (loading) {
     return (
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="h-8 bg-ivory-200 animate-pulse w-1/3 mb-6" />
+        <div className="h-8 bg-ink-700 animate-pulse w-1/3 mb-6" />
         <div className="space-y-4">
           {Array.from({ length: 2 }).map((_, i) => (
-            <div key={i} className="h-32 bg-ivory-200 animate-pulse" />
+            <div key={i} className="h-32 bg-ink-700 animate-pulse" />
           ))}
         </div>
       </div>
@@ -35,8 +35,8 @@ export function CartPage() {
       <h1 className="font-display text-4xl md:text-5xl mb-10" style={{ fontWeight: 400 }}>Your bag</h1>
 
       {cartItems.length === 0 ? (
-        <div className="text-center py-20 border border-hairline p-8">
-          <ShoppingBag size={40} className="mx-auto mb-4 text-muted-light" />
+        <div className="text-center py-20 border border-grey-dark p-8">
+          <ShoppingBag size={40} className="mx-auto mb-4 text-grey-light" />
           <p className="font-display text-2xl mb-2" style={{ fontWeight: 400 }}>Bag is empty</p>
           <p className="label-quiet mb-6">
             Items you add will show up here. Each one is held for 10 minutes.
@@ -61,12 +61,12 @@ export function CartPage() {
               return (
                 <div
                   key={ci.lock.id}
-                  className={`flex gap-5 py-5 ${idx !== cartItems.length - 1 ? 'border-b border-hairline' : ''} ${
+                  className={`flex gap-5 py-5 ${idx !== cartItems.length - 1 ? 'border-b border-grey-dark' : ''} ${
                     expired ? 'opacity-50' : ''
                   }`}
                 >
                   <Link to={`/item/${ci.item.id}`} className="shrink-0">
-                    <div className="w-24 h-32 bg-ivory-200 overflow-hidden">
+                    <div className="w-24 h-32 bg-ink-700 overflow-hidden">
                       <img
                         src={ci.item.photos[0] ?? ''}
                         alt={ci.item.name}
@@ -82,7 +82,7 @@ export function CartPage() {
                     </Link>
                     <div className="flex items-center gap-2 mb-3">
                       <span className="label-quiet">{ci.item.size}</span>
-                      <span className="text-hairline">·</span>
+                      <span className="text-grey-dark">·</span>
                       <span className="label-quiet">{ci.item.condition}</span>
                     </div>
                     <p className="font-body text-base font-medium mb-2">{formatINR(ci.item.price_inr)}</p>
@@ -96,7 +96,7 @@ export function CartPage() {
                   </div>
                   <button
                     onClick={() => removeFromCart(ci.lock.id)}
-                    className="self-start text-muted-light hover:text-error transition-colors p-1"
+                    className="self-start text-grey-light hover:text-error transition-colors p-1"
                   >
                     <Trash2 size={16} />
                   </button>

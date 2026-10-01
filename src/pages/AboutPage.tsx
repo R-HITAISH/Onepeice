@@ -20,19 +20,19 @@ export function AboutPage() {
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
         <div className="grid md:grid-cols-3 gap-12 md:gap-16">
           <div className="md:col-span-2 space-y-6">
-            <p className="font-body text-base leading-relaxed text-ink/80">
+            <p className="font-body text-base leading-relaxed text-ivory/80">
               Onepiece started in a damp basement in Pune with three garbage bags of old
               clothes and a camera phone. No investors, no warehouse, no supply chain. Just
               one question: why does every resale platform look like a luxury boutique when
               the clothes come from a thrift rack?
             </p>
-            <p className="font-body text-base leading-relaxed text-ink/80">
+            <p className="font-body text-base leading-relaxed text-ivory/80">
               Every piece we list is a single physical unit. We photograph it honestly —
               the stains, the fading, the repairs. We grade the condition in plain language.
               When it sells, it's gone. No restock notification, no waitlist, no "back soon."
               That's the point.
             </p>
-            <p className="font-body text-base leading-relaxed text-ink/80">
+            <p className="font-body text-base leading-relaxed text-ivory/80">
               We're not trying to be the biggest. We're trying to be the most honest. If a
               jacket has a hole in the pocket, we'll tell you about the hole. If a shoe has
               been worn twice, we'll say twice — not "like new, barely worn." Condition

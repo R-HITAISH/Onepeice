@@ -173,7 +173,7 @@ export function CheckoutPage() {
   if (cartLoading) {
     return (
       <div className="max-w-2xl mx-auto px-4 py-12">
-        <Loader2 size={28} className="animate-spin text-muted" />
+        <Loader2 size={28} className="animate-spin text-grey-light" />
       </div>
     );
   }
@@ -211,7 +211,7 @@ export function CheckoutPage() {
     <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-16">
       <Link
         to="/cart"
-        className="inline-flex items-center gap-2 font-body text-sm text-muted hover:text-brass mb-8 transition-colors"
+        className="inline-flex items-center gap-2 font-body text-sm text-grey-light hover:text-brass mb-8 transition-colors"
       >
         <ArrowLeft size={15} />
         Back to bag
@@ -220,18 +220,18 @@ export function CheckoutPage() {
       <h1 className="font-display text-4xl mb-10" style={{ fontWeight: 400 }}>Checkout</h1>
 
       {/* Order summary */}
-      <div className="p-5 mb-8 bg-ivory-50 border border-hairline">
+      <div className="p-5 mb-8 bg-ink-800 border border-grey-dark">
         <h3 className="label-quiet mb-4">Order summary</h3>
         <div className="space-y-2">
           {validItems.map((ci) => (
             <div key={ci.lock.id} className="flex items-center justify-between text-sm">
-              <span className="font-body text-ink/80 truncate pr-2">{ci.item.name}</span>
+              <span className="font-body text-ivory/80 truncate pr-2">{ci.item.name}</span>
               <span className="font-body font-medium whitespace-nowrap">
                 {formatINR(ci.item.price_inr)}
               </span>
             </div>
           ))}
-          <div className="flex items-center justify-between pt-3 mt-2 border-t border-hairline">
+          <div className="flex items-center justify-between pt-3 mt-2 border-t border-grey-dark">
             <span className="font-body text-sm font-medium">Total</span>
             <span className="font-display text-xl" style={{ fontWeight: 400 }}>{formatINR(total)}</span>
           </div>

@@ -6,7 +6,7 @@ export function TermsPage() {
     <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
       <Link
         to="/"
-        className="inline-flex items-center gap-2 font-body text-sm text-muted hover:text-brass mb-8 transition-colors"
+        className="inline-flex items-center gap-2 font-body text-sm text-grey-light hover:text-brass mb-8 transition-colors"
       >
         <ArrowLeft size={15} />
         Back to home
@@ -17,9 +17,9 @@ export function TermsPage() {
         Terms of Service
       </h1>
 
-      <div className="space-y-10 font-body text-sm leading-relaxed text-ink/75">
+      <div className="space-y-10 font-body text-sm leading-relaxed text-ivory/75">
         <section>
-          <h2 className="font-display text-xl mb-3 text-ink" style={{ fontWeight: 400 }}>1. Acceptance of Terms</h2>
+          <h2 className="font-display text-xl mb-3 text-ivory" style={{ fontWeight: 400 }}>1. Acceptance of Terms</h2>
           <p>
             By accessing or using ONEPIECE (the "Platform"), you agree to be bound by these Terms of Service
             ("Terms"). If you do not agree to these Terms, please do not use the Platform. ONEPIECE operates
@@ -30,7 +30,7 @@ export function TermsPage() {
         </section>
 
         <section>
-          <h2 className="font-display text-xl mb-3 text-ink" style={{ fontWeight: 400 }}>2. User Account Requirements</h2>
+          <h2 className="font-display text-xl mb-3 text-ivory" style={{ fontWeight: 400 }}>2. User Account Requirements</h2>
           <p className="mb-3">
             To purchase items or submit items for sale, you must create an account. By creating an account, you represent and warrant that:
           </p>
@@ -47,7 +47,7 @@ export function TermsPage() {
         </section>
 
         <section>
-          <h2 className="font-display text-xl mb-3 text-ink" style={{ fontWeight: 400 }}>3. Cart Reservation System</h2>
+          <h2 className="font-display text-xl mb-3 text-ivory" style={{ fontWeight: 400 }}>3. Cart Reservation System</h2>
           <p className="mb-3">
             When you add an item to your bag, ONEPIECE places a 10-minute reservation ("lock") on that item.
             During this lock period:
@@ -65,7 +65,7 @@ export function TermsPage() {
         </section>
 
         <section>
-          <h2 className="font-display text-xl mb-3 text-ink" style={{ fontWeight: 400 }}>4. Purchasing and Payment</h2>
+          <h2 className="font-display text-xl mb-3 text-ivory" style={{ fontWeight: 400 }}>4. Purchasing and Payment</h2>
           <p className="mb-3">
             All prices are listed in Indian Rupees (INR). Payments are processed through Razorpay, a PCI-DSS
             compliant payment gateway. ONEPIECE does not store your card, UPI, or banking details on its
@@ -83,7 +83,7 @@ export function TermsPage() {
         </section>
 
         <section>
-          <h2 className="font-display text-xl mb-3 text-ink" style={{ fontWeight: 400 }}>5. Returns and Refunds</h2>
+          <h2 className="font-display text-xl mb-3 text-ivory" style={{ fontWeight: 400 }}>5. Returns and Refunds</h2>
           <p className="mb-3">
             We offer a 7-day return window from the date of delivery. The following conditions apply:
           </p>
@@ -99,7 +99,7 @@ export function TermsPage() {
         </section>
 
         <section>
-          <h2 className="font-display text-xl mb-3 text-ink" style={{ fontWeight: 400 }}>6. Seller Obligations</h2>
+          <h2 className="font-display text-xl mb-3 text-ivory" style={{ fontWeight: 400 }}>6. Seller Obligations</h2>
           <p className="mb-3">
             If you submit an item for sale through our sell form, you represent and warrant that:
           </p>
@@ -117,7 +117,7 @@ export function TermsPage() {
         </section>
 
         <section>
-          <h2 className="font-display text-xl mb-3 text-ink" style={{ fontWeight: 400 }}>7. Dispute Resolution</h2>
+          <h2 className="font-display text-xl mb-3 text-ivory" style={{ fontWeight: 400 }}>7. Dispute Resolution</h2>
           <p className="mb-3">
             If you have a dispute regarding a purchase or sale, please first contact us at support@onepeice.in
             within 3 days of the issue arising. We will attempt to resolve the matter directly. If the dispute
@@ -129,7 +129,7 @@ export function TermsPage() {
         </section>
 
         <section>
-          <h2 className="font-display text-xl mb-3 text-ink" style={{ fontWeight: 400 }}>8. Limitation of Liability</h2>
+          <h2 className="font-display text-xl mb-3 text-ivory" style={{ fontWeight: 400 }}>8. Limitation of Liability</h2>
           <p>
             ONEPIECE shall not be liable for indirect, incidental, or consequential damages arising from your
             use of the Platform. Our total liability for any claim shall not exceed the amount you paid for
@@ -138,7 +138,7 @@ export function TermsPage() {
         </section>
 
         <section>
-          <h2 className="font-display text-xl mb-3 text-ink" style={{ fontWeight: 400 }}>9. Governing Law</h2>
+          <h2 className="font-display text-xl mb-3 text-ivory" style={{ fontWeight: 400 }}>9. Governing Law</h2>
           <p>
             These Terms are governed by the laws of India. The courts at Bengaluru shall have exclusive
             jurisdiction over any matters not resolved through arbitration.
@@ -146,7 +146,7 @@ export function TermsPage() {
         </section>
 
         <section>
-          <h2 className="font-display text-xl mb-3 text-ink" style={{ fontWeight: 400 }}>10. Changes to Terms</h2>
+          <h2 className="font-display text-xl mb-3 text-ivory" style={{ fontWeight: 400 }}>10. Changes to Terms</h2>
           <p>
             We may update these Terms from time to time. Continued use of the Platform after changes are posted
             constitutes acceptance of the revised Terms. The "Last updated" date at the top of this page
@@ -155,7 +155,7 @@ export function TermsPage() {
         </section>
 
         <section>
-          <h2 className="font-display text-xl mb-3 text-ink" style={{ fontWeight: 400 }}>11. Contact</h2>
+          <h2 className="font-display text-xl mb-3 text-ivory" style={{ fontWeight: 400 }}>11. Contact</h2>
           <p>
             For any questions about these Terms, email us at support@onepeice.in.
           </p>

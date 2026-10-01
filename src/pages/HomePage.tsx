@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { supabase, type Item } from '@/lib/supabase';
 import { Link } from '@/router/Router';
 import { ItemCard } from '@/components/ItemCard';
+import { Logo } from '@/components/Logo';
 import { ArrowRight } from 'lucide-react';
 
 export function HomePage() {
@@ -22,91 +23,73 @@ export function HomePage() {
   }, []);
 
   return (
-    <div>
+    <div className="bg-ink">
       {/* Hero */}
-      <section className="bg-ink text-ivory">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-36">
-          <div className="max-w-2xl animate-slide-up">
-            <p className="label-quiet text-brass-light mb-6">
-              Thrifted · Secondhand · One of One
-            </p>
-            <h1 className="font-display text-5xl md:text-7xl leading-[1.05] mb-8" style={{ fontWeight: 300 }}>
-              One of one.
-              <br />
-              Never restocked.
-            </h1>
-            <p className="font-body text-base text-ivory/50 max-w-lg mb-10 leading-relaxed">
-              Every piece on Onepiece is a single physical unit. When it sells, it's gone
-              for good. No restocks, no reproductions, no lies.
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <Link to="/shop" className="btn btn-primary">
-                Shop the drop
-                <ArrowRight size={16} />
-              </Link>
-              <Link to="/sell" className="btn btn-ghost text-ivory hover:text-brass-light">
-                Sell to us
-              </Link>
-            </div>
+      <section className="bg-ink border-b-2 border-brass min-h-[500px] flex items-center justify-center px-4 py-20">
+        <div className="max-w-2xl text-center animate-brand-in">
+          <div className="flex justify-center mb-8">
+            <Logo variant="mark" height={150} className="animate-brand-in" />
           </div>
-        </div>
-
-        <div className="border-t border-ivory/10">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-wrap items-center gap-x-8 gap-y-2 justify-center md:justify-between">
-            {['Real photos', 'Real condition', 'Real stock', 'No reproductions'].map((t) => (
-              <span key={t} className="label-quiet text-ivory/30">
-                {t}
-              </span>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Current drop */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
-        <div className="flex items-end justify-between mb-10 md:mb-14">
-          <div>
-            <p className="label-quiet mb-2">Current drop</p>
-            <h2 className="font-display text-3xl md:text-4xl" style={{ fontWeight: 400 }}>Fresh stock</h2>
-          </div>
-          <Link
-            to="/shop"
-            className="hidden sm:flex items-center gap-2 font-body text-sm text-muted hover:text-brass transition-colors"
-          >
-            View all
-            <ArrowRight size={14} />
-          </Link>
-        </div>
-
-        {loading ? (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
-            {Array.from({ length: 6 }).map((_, i) => (
-              <div key={i} className="aspect-[3/4] bg-ivory-200 animate-pulse" />
-            ))}
-          </div>
-        ) : featured.length === 0 ? (
-          <div className="text-center py-20">
-            <p className="label-quiet">Drop is empty. Check back soon.</p>
-          </div>
-        ) : (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
-            {featured.map((item) => (
-              <ItemCard key={item.id} item={item} />
-            ))}
-          </div>
-        )}
-
-        <div className="mt-10 sm:hidden">
-          <Link to="/shop" className="btn btn-dark w-full">
-            View all
+          <h1 className="font-display text-4xl md:text-5xl text-ivory mb-4 uppercase tracking-wider">
+            Premium Thrifted Streetwear
+          </h1>
+          <p className="font-body text-sm text-grey-light mb-10 tracking-wide">
+            One-of-one pieces. Never restocked. Always authentic.
+          </p>
+          <Link to="/shop" className="btn btn-primary inline-flex">
+            Shop Now
             <ArrowRight size={16} />
           </Link>
         </div>
       </section>
 
+      {/* Current drop */}
+      <section className="bg-ink py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex items-end justify-between mb-10 md:mb-14">
+            <div>
+              <p className="label-quiet mb-2">Current drop</p>
+              <h2 className="font-display text-2xl md:text-3xl text-ivory uppercase tracking-wider">Fresh Stock</h2>
+            </div>
+            <Link
+              to="/shop"
+              className="hidden sm:flex items-center gap-2 font-body text-xs font-semibold text-ivory uppercase tracking-wider hover:text-brass transition-colors"
+            >
+              View All
+              <ArrowRight size={14} />
+            </Link>
+          </div>
+
+          {loading ? (
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
+              {Array.from({ length: 6 }).map((_, i) => (
+                <div key={i} className="aspect-[3/4] bg-ink-800 animate-pulse" />
+              ))}
+            </div>
+          ) : featured.length === 0 ? (
+            <div className="text-center py-20">
+              <p className="label-quiet">Drop is empty. Check back soon.</p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
+              {featured.map((item) => (
+                <ItemCard key={item.id} item={item} />
+              ))}
+            </div>
+          )}
+
+          <div className="mt-10 sm:hidden">
+            <Link to="/shop" className="btn btn-dark w-full">
+              View All
+              <ArrowRight size={16} />
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* How it works */}
-      <section className="bg-ink text-ivory">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <section className="bg-ink border-t border-grey-dark py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-3 gap-12">
             {[
               {
@@ -125,10 +108,10 @@ export function HomePage() {
                 body: 'Checkout with Razorpay. Once paid, the item is marked sold — permanently. No restocks.',
               },
             ].map((step) => (
-              <div key={step.num} className="border-l border-ivory/15 pl-6">
-                <span className="font-display text-3xl text-brass-light block mb-4" style={{ fontWeight: 300 }}>{step.num}</span>
-                <h3 className="font-display text-lg mb-2" style={{ fontWeight: 400 }}>{step.title}</h3>
-                <p className="font-body text-sm text-ivory/50 leading-relaxed">{step.body}</p>
+              <div key={step.num} className="border-l border-brass pl-6">
+                <span className="font-display text-3xl text-brass block mb-4">{step.num}</span>
+                <h3 className="font-display text-lg text-ivory mb-2 uppercase tracking-wider">{step.title}</h3>
+                <p className="font-body text-sm text-grey-light leading-relaxed">{step.body}</p>
               </div>
             ))}
           </div>

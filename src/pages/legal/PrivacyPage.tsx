@@ -6,7 +6,7 @@ export function PrivacyPage() {
     <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
       <Link
         to="/"
-        className="inline-flex items-center gap-2 font-body text-sm text-muted hover:text-brass mb-8 transition-colors"
+        className="inline-flex items-center gap-2 font-body text-sm text-grey-light hover:text-brass mb-8 transition-colors"
       >
         <ArrowLeft size={15} />
         Back to home
@@ -17,9 +17,9 @@ export function PrivacyPage() {
         Privacy Policy
       </h1>
 
-      <div className="space-y-10 font-body text-sm leading-relaxed text-ink/75">
+      <div className="space-y-10 font-body text-sm leading-relaxed text-ivory/75">
         <section>
-          <h2 className="font-display text-xl mb-3 text-ink" style={{ fontWeight: 400 }}>1. Information We Collect</h2>
+          <h2 className="font-display text-xl mb-3 text-ivory" style={{ fontWeight: 400 }}>1. Information We Collect</h2>
           <p className="mb-3"><strong>Personal information you provide directly:</strong></p>
           <ul className="list-disc pl-5 space-y-1.5">
             <li><strong>Phone number:</strong> Used for OTP-based authentication. We send a one-time password via SMS to verify your number.</li>
@@ -31,7 +31,7 @@ export function PrivacyPage() {
         </section>
 
         <section>
-          <h2 className="font-display text-xl mb-3 text-ink" style={{ fontWeight: 400 }}>2. Automatic Data Collection</h2>
+          <h2 className="font-display text-xl mb-3 text-ivory" style={{ fontWeight: 400 }}>2. Automatic Data Collection</h2>
           <p className="mb-3">When you visit the Platform, we automatically collect:</p>
           <ul className="list-disc pl-5 space-y-1.5">
             <li><strong>Usage data:</strong> Pages visited, time spent, items viewed, and actions taken (add to bag, checkout initiated).</li>
@@ -42,7 +42,7 @@ export function PrivacyPage() {
         </section>
 
         <section>
-          <h2 className="font-display text-xl mb-3 text-ink" style={{ fontWeight: 400 }}>3. How We Use Your Data</h2>
+          <h2 className="font-display text-xl mb-3 text-ivory" style={{ fontWeight: 400 }}>3. How We Use Your Data</h2>
           <ul className="list-disc pl-5 space-y-1.5">
             <li>To process and fulfill your orders, including shipping and delivery.</li>
             <li>To authenticate your account via OTP or Google Sign-In.</li>
@@ -54,7 +54,7 @@ export function PrivacyPage() {
         </section>
 
         <section>
-          <h2 className="font-display text-xl mb-3 text-ink" style={{ fontWeight: 400 }}>4. Data Storage and Security</h2>
+          <h2 className="font-display text-xl mb-3 text-ivory" style={{ fontWeight: 400 }}>4. Data Storage and Security</h2>
           <p className="mb-3">
             Your data is stored with Supabase, our database provider, which uses industry-standard encryption
             and access controls. Authentication data (phone numbers, session tokens) is managed through
@@ -69,7 +69,7 @@ export function PrivacyPage() {
         </section>
 
         <section>
-          <h2 className="font-display text-xl mb-3 text-ink" style={{ fontWeight: 400 }}>5. Third-Party Sharing</h2>
+          <h2 className="font-display text-xl mb-3 text-ivory" style={{ fontWeight: 400 }}>5. Third-Party Sharing</h2>
           <p className="mb-3">We share data with the following service providers strictly for operational purposes:</p>
           <ul className="list-disc pl-5 space-y-1.5">
             <li><strong>Razorpay:</strong> Payment processing. Receives your payment amount and order reference. Does not receive your browsing data.</li>
@@ -85,7 +85,7 @@ export function PrivacyPage() {
         </section>
 
         <section>
-          <h2 className="font-display text-xl mb-3 text-ink" style={{ fontWeight: 400 }}>6. Your Rights</h2>
+          <h2 className="font-display text-xl mb-3 text-ivory" style={{ fontWeight: 400 }}>6. Your Rights</h2>
           <p className="mb-3">Under applicable Indian data protection regulations, you have the right to:</p>
           <ul className="list-disc pl-5 space-y-1.5">
             <li><strong>Access:</strong> Request a copy of the personal data we hold about you.</li>
@@ -100,7 +100,7 @@ export function PrivacyPage() {
         </section>
 
         <section>
-          <h2 className="font-display text-xl mb-3 text-ink" style={{ fontWeight: 400 }}>7. Cookies and Tracking</h2>
+          <h2 className="font-display text-xl mb-3 text-ivory" style={{ fontWeight: 400 }}>7. Cookies and Tracking</h2>
           <p className="mb-3">We use the following categories of cookies and tracking technologies:</p>
           <ul className="list-disc pl-5 space-y-1.5">
             <li><strong>Essential cookies:</strong> Required for authentication, cart functionality, and session management. Cannot be disabled.</li>
@@ -110,7 +110,7 @@ export function PrivacyPage() {
         </section>
 
         <section>
-          <h2 className="font-display text-xl mb-3 text-ink" style={{ fontWeight: 400 }}>8. Google Sign-In Data Handling</h2>
+          <h2 className="font-display text-xl mb-3 text-ivory" style={{ fontWeight: 400 }}>8. Google Sign-In Data Handling</h2>
           <p>
             If you choose to sign in with Google, we receive your Google account email address and basic
             profile information (name, profile picture URL) through Google's OAuth 2.0 API. We use this
@@ -121,7 +121,7 @@ export function PrivacyPage() {
         </section>
 
         <section>
-          <h2 className="font-display text-xl mb-3 text-ink" style={{ fontWeight: 400 }}>9. Data Retention</h2>
+          <h2 className="font-display text-xl mb-3 text-ivory" style={{ fontWeight: 400 }}>9. Data Retention</h2>
           <p>
             We retain order records (including shipping address and payment references) for 7 years as
             required by Indian tax and accounting regulations. Account data is retained until you request
@@ -130,7 +130,7 @@ export function PrivacyPage() {
         </section>
 
         <section>
-          <h2 className="font-display text-xl mb-3 text-ink" style={{ fontWeight: 400 }}>10. Contact</h2>
+          <h2 className="font-display text-xl mb-3 text-ivory" style={{ fontWeight: 400 }}>10. Contact</h2>
           <p>
             For privacy questions or to exercise your data rights, email support@onepeice.in.
           </p>

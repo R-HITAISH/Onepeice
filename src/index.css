@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Work+Sans:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -10,53 +10,66 @@
   }
 
   body {
-    background-color: #F7F5F0;
-    color: #17181A;
-    font-family: 'Work Sans', sans-serif;
+    background-color: #0a0a0a;
+    color: #f5f3f0;
+    font-family: 'Work Sans', -apple-system, BlinkMacSystemFont, sans-serif;
     font-weight: 400;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
+  h1, h2, h3, h4 {
+    font-family: Impact, Haettenschweiler, 'Franklin Gothic Bold', sans-serif;
+    font-weight: 900;
+    letter-spacing: 2px;
+  }
+
   ::selection {
-    background-color: #8A6D4E;
-    color: #F7F5F0;
+    background-color: #a67c34;
+    color: #0a0a0a;
   }
 
   ::-webkit-scrollbar {
     width: 6px;
   }
   ::-webkit-scrollbar-track {
-    background: #F7F5F0;
+    background: #0a0a0a;
   }
   ::-webkit-scrollbar-thumb {
-    background: #C4C0B6;
+    background: #333333;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #a67c34;
   }
 }
 
 @layer components {
   .btn {
-    @apply inline-flex items-center justify-center gap-2 px-7 py-3.5 font-body text-sm font-medium transition-all duration-200 cursor-pointer;
+    @apply inline-flex items-center justify-center gap-2 px-7 py-3.5 font-display text-impact uppercase transition-all duration-300 cursor-pointer;
   }
 
   .btn-primary {
-    @apply bg-brass text-ivory shadow-soft hover:bg-brass-hover hover:shadow-soft-lg active:translate-y-px;
+    @apply bg-brass text-ink hover:bg-brass-hover hover:-translate-y-0.5 active:translate-y-0;
   }
 
   .btn-dark {
-    @apply bg-ink text-ivory hover:bg-ink-700 transition-colors;
+    @apply bg-ink-800 text-ivory border border-grey-dark hover:border-brass hover:text-brass transition-colors;
   }
 
   .btn-light {
-    @apply bg-ivory-50 text-ink border border-hairline hover:bg-ivory-200 transition-colors;
+    @apply bg-ivory text-ink border border-grey-dark hover:bg-ivory-200 transition-colors;
   }
 
   .btn-ghost {
-    @apply bg-transparent text-ink hover:text-brass transition-colors;
+    @apply bg-transparent text-ivory hover:text-brass transition-colors;
+  }
+
+  .btn-outline {
+    @apply bg-transparent border-2 border-brass text-brass hover:bg-brass hover:text-ink transition-all duration-300;
   }
 
   .card {
-    @apply bg-ivory-50 transition-all duration-300 hover:shadow-soft;
+    @apply bg-ink-800 border border-grey-dark transition-all duration-300 hover:border-brass hover:-translate-y-1;
   }
 
   .card-dark {
@@ -64,19 +77,23 @@
   }
 
   .tag {
-    @apply inline-block px-2.5 py-1 font-body text-xs font-medium tracking-wide;
+    @apply inline-block px-2.5 py-1 font-mono text-[10px] font-bold tracking-wider uppercase;
   }
 
   .tag-sold {
-    @apply bg-brass text-ivory;
+    @apply bg-brass text-ink;
   }
 
   .tag-dark {
-    @apply bg-ink text-ivory;
+    @apply bg-grey-dark text-ivory;
+  }
+
+  .tag-one-of-one {
+    @apply text-brass font-mono text-[10px] font-bold tracking-widest uppercase;
   }
 
   .input-field {
-    @apply w-full bg-ivory-50 border border-hairline px-4 py-3 font-body text-sm text-ink placeholder:text-muted-light focus:outline-none focus:border-brass transition-colors;
+    @apply w-full bg-ink-800 border border-grey-dark px-4 py-3 font-body text-sm text-ivory placeholder:text-grey-medium focus:outline-none focus:border-brass transition-colors;
   }
 
   .filter-btn {
@@ -84,18 +101,18 @@
   }
 
   .filter-btn-active {
-    @apply bg-ink text-ivory;
+    @apply bg-brass text-ink;
   }
 
   .filter-btn-inactive {
-    @apply bg-ivory-50 text-ink border border-hairline hover:border-ink;
+    @apply bg-ink-800 text-ivory border border-grey-dark hover:border-brass;
   }
 
   .label-quiet {
-    @apply font-body text-xs text-muted tracking-wide;
+    @apply font-body text-xs text-grey-light tracking-wide;
   }
 
   .divider {
-    @apply border-t border-hairline;
+    @apply border-t border-grey-dark;
   }
 }

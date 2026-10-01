@@ -1,80 +1,62 @@
 import { Link } from '@/router/Router';
-import { Instagram, Mail } from 'lucide-react';
+import { Instagram, Mail, Twitter } from 'lucide-react';
+import { Logo } from '@/components/Logo';
 
 export function Footer() {
   return (
-    <footer className="bg-ink text-ivory">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-          <div>
-            <h3 className="font-display text-2xl mb-3" style={{ fontWeight: 400 }}>Onepiece</h3>
-            <p className="font-body text-sm text-ivory/50 leading-relaxed">
-              One of one. Never restocked. Thrifted streetwear, resold with intent.
-            </p>
-          </div>
-
-          <div>
-            <h4 className="label-quiet text-ivory/40 mb-4">Navigate</h4>
-            <ul className="space-y-2.5">
-              <li>
-                <Link to="/shop" className="font-body text-sm text-ivory/70 hover:text-brass-light transition-colors">
-                  Shop the drop
-                </Link>
-              </li>
-              <li>
-                <Link to="/sell" className="font-body text-sm text-ivory/70 hover:text-brass-light transition-colors">
-                  Sell to us
-                </Link>
-              </li>
-              <li>
-                <Link to="/about" className="font-body text-sm text-ivory/70 hover:text-brass-light transition-colors">
-                  About
-                </Link>
-              </li>
-              <li>
-                <Link to="/account" className="font-body text-sm text-ivory/70 hover:text-brass-light transition-colors">
-                  Account
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 className="label-quiet text-ivory/40 mb-4">Contact</h4>
-            <div className="flex items-center gap-5">
-              <a
-                href="#"
-                className="flex items-center gap-2 font-body text-sm text-ivory/70 hover:text-brass-light transition-colors"
-              >
-                <Instagram size={16} />
-                @onepiece
-              </a>
-              <a
-                href="mailto:hey@onepiece.in"
-                className="flex items-center gap-2 font-body text-sm text-ivory/70 hover:text-brass-light transition-colors"
-              >
-                <Mail size={16} />
-                hey@onepiece.in
-              </a>
-            </div>
-          </div>
+    <footer className="bg-ink border-t-2 border-brass">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-14 text-center">
+        <div className="flex justify-center mb-5">
+          <Logo height={35} />
         </div>
 
-        <div className="mt-12 pt-6 border-t border-ivory/10 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="label-quiet text-ivory/30">
-            © {new Date().getFullYear()} Onepiece. All items one-of-one. No restocks, no exceptions.
-          </p>
-          <div className="flex items-center gap-5">
-            <Link to="/terms" className="label-quiet text-ivory/30 hover:text-brass-light transition-colors">
-              Terms
-            </Link>
-            <Link to="/privacy" className="label-quiet text-ivory/30 hover:text-brass-light transition-colors">
-              Privacy
-            </Link>
-            <Link to="/refund-shipping" className="label-quiet text-ivory/30 hover:text-brass-light transition-colors">
-              Refunds &amp; Shipping
-            </Link>
-          </div>
+        <p className="font-body text-xs font-semibold text-ivory uppercase tracking-wider mb-2">
+          Premium Thrifted Streetwear
+        </p>
+        <p className="font-body text-[10px] text-grey-medium mb-6">
+          &copy; {new Date().getFullYear()} ONEPEICE &middot; Bengaluru, India
+        </p>
+
+        <div className="flex justify-center items-center gap-5 mb-4">
+          <a
+            href="mailto:support@onepeice.in"
+            className="font-body text-xs font-semibold text-brass hover:opacity-80 transition-opacity"
+          >
+            support@onepeice.in
+          </a>
+        </div>
+
+        <div className="flex justify-center items-center gap-5 mb-4">
+          <a
+            href="https://instagram.com/onepeice"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 font-body text-xs font-semibold text-brass hover:opacity-80 transition-opacity"
+          >
+            <Instagram size={14} />
+            Instagram
+          </a>
+          <a
+            href="https://twitter.com/onepeice"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 font-body text-xs font-semibold text-brass hover:opacity-80 transition-opacity"
+          >
+            <Twitter size={14} />
+            Twitter
+          </a>
+        </div>
+
+        <div className="flex justify-center items-center gap-5">
+          <Link to="/terms" className="font-body text-xs font-semibold text-brass hover:opacity-80 transition-opacity">
+            Terms of Service
+          </Link>
+          <Link to="/privacy" className="font-body text-xs font-semibold text-brass hover:opacity-80 transition-opacity">
+            Privacy Policy
+          </Link>
+          <Link to="/refund-shipping" className="font-body text-xs font-semibold text-brass hover:opacity-80 transition-opacity">
+            Refund &amp; Shipping
+          </Link>
         </div>
       </div>
     </footer>

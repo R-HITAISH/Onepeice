@@ -117,7 +117,7 @@ export function SellPage() {
       <div className="mb-10">
         <p className="label-quiet mb-2">Got something worth reselling?</p>
         <h1 className="font-display text-4xl md:text-5xl mb-4" style={{ fontWeight: 400 }}>Sell to us</h1>
-        <p className="font-body text-sm text-muted leading-relaxed max-w-md">
+        <p className="font-body text-sm text-grey-light leading-relaxed max-w-md">
           Tell us what you've got. If it fits the drop, we'll make you an offer. No fluff,
           no lowballing — just fair prices for real pieces.
         </p>
@@ -222,9 +222,9 @@ export function SellPage() {
           <label className="label-quiet block mb-2">Photos (up to 5)</label>
           <div
             onClick={() => fileRef.current?.click()}
-            className="border border-dashed border-hairline p-8 text-center cursor-pointer hover:bg-ivory-200 transition-colors"
+            className="border border-dashed border-grey-dark p-8 text-center cursor-pointer hover:bg-ink-700 transition-colors"
           >
-            <Upload size={22} className="mx-auto mb-3 text-muted-light" />
+            <Upload size={22} className="mx-auto mb-3 text-grey-light" />
             <p className="label-quiet">
               {photos.length > 0
                 ? `${photos.length} photo${photos.length > 1 ? 's' : ''} selected`

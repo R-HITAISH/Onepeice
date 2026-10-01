@@ -34,7 +34,7 @@ export function AccountPage() {
   if (authLoading || (!user && !authLoading)) {
     return (
       <div className="max-w-4xl mx-auto px-4 py-12">
-        <Loader2 size={28} className="animate-spin text-muted" />
+        <Loader2 size={28} className="animate-spin text-grey-light" />
       </div>
     );
   }
@@ -49,12 +49,12 @@ export function AccountPage() {
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-3 gap-0 mb-10 border-t border-b border-hairline">
-        <div className="py-5 pr-4 border-r border-hairline">
+      <div className="grid grid-cols-3 gap-0 mb-10 border-t border-b border-grey-dark">
+        <div className="py-5 pr-4 border-r border-grey-dark">
           <p className="label-quiet mb-1">Orders</p>
           <p className="font-display text-2xl" style={{ fontWeight: 400 }}>{orders.length}</p>
         </div>
-        <div className="py-5 px-4 border-r border-hairline">
+        <div className="py-5 px-4 border-r border-grey-dark">
           <p className="label-quiet mb-1">Paid</p>
           <p className="font-display text-2xl" style={{ fontWeight: 400 }}>
             {orders.filter((o) => o.status === 'paid').length}
@@ -72,10 +72,10 @@ export function AccountPage() {
       <h2 className="font-display text-2xl mb-6" style={{ fontWeight: 400 }}>Order history</h2>
 
       {loading ? (
-        <Loader2 size={22} className="animate-spin text-muted" />
+        <Loader2 size={22} className="animate-spin text-grey-light" />
       ) : orders.length === 0 ? (
-        <div className="border border-hairline p-10 text-center">
-          <Package size={36} className="mx-auto mb-3 text-muted-light" />
+        <div className="border border-grey-dark p-10 text-center">
+          <Package size={36} className="mx-auto mb-3 text-grey-light" />
           <p className="label-quiet mb-5">No orders yet.</p>
           <Link to="/shop" className="btn btn-dark">
             <ShoppingBag size={15} />
@@ -87,14 +87,14 @@ export function AccountPage() {
           {orders.map((order, idx) => (
             <div
               key={order.id}
-              className={`py-6 ${idx !== orders.length - 1 ? 'border-b border-hairline' : ''}`}
+              className={`py-6 ${idx !== orders.length - 1 ? 'border-b border-grey-dark' : ''}`}
             >
               <div className="flex items-start justify-between mb-4">
                 <div>
                   <p className="label-quiet">
                     Order {order.id.slice(0, 8).toUpperCase()}
                   </p>
-                  <p className="label-quiet text-muted-light">{timeAgo(order.created_at)}</p>
+                  <p className="label-quiet text-grey-light">{timeAgo(order.created_at)}</p>
                 </div>
                 <span
                   className={`tag ${
@@ -131,7 +131,7 @@ export function AccountPage() {
                   </Link>
                 ))}
               </div>
-              <div className="flex items-center justify-between pt-4 mt-4 border-t border-hairline">
+              <div className="flex items-center justify-between pt-4 mt-4 border-t border-grey-dark">
                 <span className="label-quiet">Total</span>
                 <span className="font-display text-lg" style={{ fontWeight: 400 }}>{formatINR(order.total_inr)}</span>
               </div>

@@ -73,7 +73,7 @@ export function AuthPage() {
           <div>
             <label className="label-quiet block mb-1.5">Mobile number</label>
             <div className="relative">
-              <span className="absolute left-4 top-1/2 -translate-y-1/2 font-body text-sm text-muted pointer-events-none">
+              <span className="absolute left-4 top-1/2 -translate-y-1/2 font-body text-sm text-grey-light pointer-events-none">
                 +91
               </span>
               <input
@@ -158,14 +158,14 @@ export function AuthPage() {
               type="button"
               onClick={handleResend}
               disabled={resendCooldown}
-              className="font-body text-xs text-brass hover:underline disabled:text-muted disabled:no-underline"
+              className="font-body text-xs text-brass hover:underline disabled:text-grey-medium disabled:no-underline"
             >
               {resendCooldown ? 'Resend in 30s' : 'Resend OTP'}
             </button>
             <button
               type="button"
               onClick={() => { resetOTP(); setOtpInput(''); setError(null); }}
-              className="flex items-center gap-1.5 font-body text-xs text-muted hover:text-brass transition-colors"
+              className="flex items-center gap-1.5 font-body text-xs text-grey-light hover:text-brass transition-colors"
             >
               <ArrowLeft size={13} />
               Change number
@@ -176,10 +176,10 @@ export function AuthPage() {
 
       <div className="relative my-8">
         <div className="absolute inset-0 flex items-center">
-          <div className="w-full border-t border-hairline" />
+          <div className="w-full border-t border-grey-dark" />
         </div>
         <div className="relative flex justify-center">
-          <span className="bg-bone px-4 label-quiet">or</span>
+          <span className="bg-ink px-4 label-quiet">or</span>
         </div>
       </div>
 
