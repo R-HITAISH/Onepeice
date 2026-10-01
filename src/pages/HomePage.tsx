@@ -1,13 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { supabase, type Item } from '@/lib/supabase';
 import { Link } from '@/router/Router';
 import { ItemCard } from '@/components/ItemCard';
-import { Logo } from '@/components/Logo';
 import { ArrowRight } from 'lucide-react';
 
 export function HomePage() {
   const [featured, setFeatured] = useState<Item[]>([]);
   const [loading, setLoading] = useState(true);
+  const heroRef = useRef<HTMLElement>(null);
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     supabase
@@ -22,24 +23,101 @@ export function HomePage() {
       });
   }, []);
 
+  useEffect(() => {
+    const el = heroRef.current;
+    if (!el) return;
+
+    let raf = 0;
+    const onMove = (e: MouseEvent) => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const rect = el.getBoundingClientRect();
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top + rect.height / 2;
+        const dx = (e.clientX - cx) / rect.width;
+        const dy = (e.clientY - cy) / rect.height;
+        setTilt({ x: dy * 18, y: dx * 18 });
+      });
+    };
+    const onLeave = () => {
+      cancelAnimationFrame(raf);
+      setTilt({ x: 0, y: 0 });
+    };
+
+    el.addEventListener('mousemove', onMove);
+    el.addEventListener('mouseleave', onLeave);
+    return () => {
+      el.removeEventListener('mousemove', onMove);
+      el.removeEventListener('mouseleave', onLeave);
+      cancelAnimationFrame(raf);
+    };
+  }, []);
+
   return (
     <div className="bg-ink">
-      {/* Hero */}
-      <section className="bg-ink border-b-2 border-brass min-h-[500px] flex items-center justify-center px-4 py-20">
-        <div className="max-w-2xl text-center animate-brand-in">
-          <div className="flex justify-center mb-8">
-            <Logo variant="mark" height={150} className="animate-brand-in" />
-          </div>
-          <h1 className="font-display text-4xl md:text-5xl text-ivory mb-4 uppercase tracking-wider">
+      {/* 3D Animated Hero */}
+      <section
+        ref={heroRef}
+        className="hero-3d relative bg-ink border-b-2 border-brass min-h-[100vh] flex items-center justify-center overflow-hidden px-4 py-20"
+        style={{ perspective: '1200px' }}
+      >
+        {/* Ambient grain particles */}
+        <div className="hero-particles" aria-hidden="true">
+          {Array.from({ length: 24 }).map((_, i) => (
+            <span
+              key={i}
+              className="hero-particle"
+              style={{
+                left: `${(i * 37) % 100}%`,
+                top: `${(i * 53) % 100}%`,
+                animationDelay: `${(i * 0.4) % 6}s`,
+                animationDuration: `${5 + (i % 5)}s`,
+              }}
+            />
+          ))}
+        </div>
+
+        {/* Radial glow */}
+        <div className="hero-glow" aria-hidden="true" />
+
+        {/* 3D Brand Mark */}
+        <div
+          className="hero-3d-mark"
+          style={{
+            transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
+          }}
+        >
+          {/* Outer ring */}
+          <div className="hero-3d-ring hero-3d-ring-outer" />
+          {/* Hexagon frame */}
+          <div className="hero-3d-hexagon" />
+          {/* Mid ring */}
+          <div className="hero-3d-ring hero-3d-ring-mid" />
+          {/* Inner ring */}
+          <div className="hero-3d-ring hero-3d-ring-inner" />
+          {/* Core dot */}
+          <div className="hero-3d-core" />
+          {/* Shadow plane */}
+          <div className="hero-3d-shadow" />
+        </div>
+
+        {/* Text content */}
+        <div className="hero-content-3d relative z-10 text-center">
+          <h1 className="font-display text-4xl md:text-6xl text-ivory mb-4 uppercase tracking-wider animate-slide-up">
             Premium Thrifted Streetwear
           </h1>
-          <p className="font-body text-sm text-grey-light mb-10 tracking-wide">
+          <p className="font-body text-sm md:text-base text-grey-light mb-10 tracking-wide animate-slide-up" style={{ animationDelay: '0.15s' }}>
             One-of-one pieces. Never restocked. Always authentic.
           </p>
-          <Link to="/shop" className="btn btn-primary inline-flex">
+          <Link to="/shop" className="btn btn-primary inline-flex animate-slide-up" style={{ animationDelay: '0.3s' }}>
             Shop Now
             <ArrowRight size={16} />
           </Link>
+        </div>
+
+        {/* Scroll indicator */}
+        <div className="hero-scroll-indicator" aria-hidden="true">
+          <span className="hero-scroll-line" />
         </div>
       </section>
 
