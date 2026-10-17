@@ -2,14 +2,23 @@ import { Link, useRouter } from '@/router/Router';
 import { useCart } from '@/context/CartContext';
 import { useAuth } from '@/context/AuthContext';
 import { ShoppingBag, User, Menu, X, LogOut } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Logo } from '@/components/Logo';
 
 export function Navbar() {
   const { itemCount } = useCart();
   const { user, signOut } = useAuth();
-  const { navigate } = useRouter();
+  const { path, navigate } = useRouter();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [bump, setBump] = useState(false);
+
+  useEffect(() => {
+    if (itemCount > 0) {
+      setBump(true);
+      const t = setTimeout(() => setBump(false), 150);
+      return () => clearTimeout(t);
+    }
+  }, [itemCount]);
 
   const navItems = [
     { label: 'Shop', to: '/shop' },
@@ -30,7 +39,8 @@ export function Navbar() {
                 <Link
                   key={item.to}
                   to={item.to}
-                  className="font-body text-xs font-semibold text-ivory uppercase tracking-wider hover:text-brass transition-colors"
+                  className="nav-link font-body text-xs font-semibold text-ivory uppercase tracking-wider hover:text-brass transition-colors"
+                  aria-current={path === item.to ? 'page' : undefined}
                 >
                   {item.label}
                 </Link>
@@ -60,7 +70,7 @@ export function Navbar() {
             >
               <ShoppingBag size={18} />
               {itemCount > 0 && (
-                <span className="absolute -top-2 -right-2 bg-brass text-ink text-[10px] font-bold w-4 h-4 flex items-center justify-center">
+                <span className={`cart-badge absolute -top-2 -right-2 bg-brass text-ink text-[10px] font-bold w-4 h-4 flex items-center justify-center ${bump ? 'bump' : ''}`}>
                   {itemCount}
                 </span>
               )}

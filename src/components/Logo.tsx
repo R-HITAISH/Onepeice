@@ -14,14 +14,16 @@ export function Logo({ className = '', variant = 'full', height = 50 }: LogoProp
         style={{ height, width: 'auto' }}
       >
         <g transform="translate(90, 90)">
-          <circle cx="0" cy="0" r="40" fill="none" stroke="#a67c34" strokeWidth="3" />
+          <circle cx="0" cy="0" r="40" fill="none" stroke="#a67c34" strokeWidth="3" pathLength={1} className="draw" />
           <path
             d="M 0 -40 L 34 -20 L 34 20 L 0 40 L -34 20 L -34 -20 Z"
             fill="none"
             stroke="#a67c34"
             strokeWidth="2.5"
+            pathLength={1}
+            className="draw"
           />
-          <circle cx="0" cy="0" r="6" fill="#a67c34" />
+          <circle cx="0" cy="0" r="6" fill="#a67c34" className="dot" />
         </g>
       </svg>
     );
