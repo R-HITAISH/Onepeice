@@ -1,62 +1,51 @@
 import { Link } from '@/router/Router';
-import { Instagram, Mail, Twitter } from 'lucide-react';
+import { Instagram, Mail } from 'lucide-react';
 import { Logo } from '@/components/Logo';
 
 export function Footer() {
   return (
-    <footer className="bg-ink border-t-2 border-brass">
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-14 text-center">
-        <div className="flex justify-center mb-5">
-          <Logo height={35} />
+    <footer className="hairline-t" style={{ backgroundColor: 'var(--paper)' }}>
+      <div className="max-w-[1280px] mx-auto px-[clamp(1.25rem,4vw,3rem)] py-16 md:py-24">
+        <div className="flex flex-col md:flex-row md:items-start gap-12 md:gap-20">
+          <div className="flex-shrink-0">
+            <Logo height={36} />
+          </div>
+
+          <div className="flex flex-wrap gap-x-16 gap-y-8 flex-1">
+            <div>
+              <p className="label mb-3">Shop</p>
+              <Link to="/shop" className="text-link block mb-2">All pieces</Link>
+              <Link to="/sell" className="text-link block">Sell to us</Link>
+            </div>
+            <div>
+              <p className="label mb-3">Legal</p>
+              <Link to="/terms" className="text-link block mb-2">Terms</Link>
+              <Link to="/privacy" className="text-link block mb-2">Privacy</Link>
+              <Link to="/refund-shipping" className="text-link block">Refunds &amp; shipping</Link>
+            </div>
+            <div>
+              <p className="label mb-3">Connect</p>
+              <a href="mailto:support@onepeice.in" className="text-link flex items-center gap-1.5 mb-2">
+                <Mail size={13} />
+                support@onepeice.in
+              </a>
+              <a
+                href="https://instagram.com/onepeice"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-link flex items-center gap-1.5"
+              >
+                <Instagram size={13} />
+                Instagram
+              </a>
+            </div>
+          </div>
         </div>
 
-        <p className="font-body text-xs font-semibold text-ivory uppercase tracking-wider mb-2">
-          Premium Thrifted Streetwear
-        </p>
-        <p className="font-body text-[10px] text-grey-medium mb-6">
-          &copy; {new Date().getFullYear()} ONEPEICE &middot; Bengaluru, India
-        </p>
-
-        <div className="flex justify-center items-center gap-5 mb-4">
-          <a
-            href="mailto:support@onepeice.in"
-            className="font-body text-xs font-semibold text-brass hover:opacity-80 transition-opacity"
-          >
-            support@onepeice.in
-          </a>
-        </div>
-
-        <div className="flex justify-center items-center gap-5 mb-4">
-          <a
-            href="https://instagram.com/onepeice"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 font-body text-xs font-semibold text-brass hover:opacity-80 transition-opacity"
-          >
-            <Instagram size={14} />
-            Instagram
-          </a>
-          <a
-            href="https://twitter.com/onepeice"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-1.5 font-body text-xs font-semibold text-brass hover:opacity-80 transition-opacity"
-          >
-            <Twitter size={14} />
-            Twitter
-          </a>
-        </div>
-
-        <div className="flex justify-center items-center gap-5">
-          <Link to="/terms" className="font-body text-xs font-semibold text-brass hover:opacity-80 transition-opacity">
-            Terms of Service
-          </Link>
-          <Link to="/privacy" className="font-body text-xs font-semibold text-brass hover:opacity-80 transition-opacity">
-            Privacy Policy
-          </Link>
-          <Link to="/refund-shipping" className="font-body text-xs font-semibold text-brass hover:opacity-80 transition-opacity">
-            Refund &amp; Shipping
-          </Link>
+        <div className="hairline-t mt-16 pt-8">
+          <p className="label" style={{ color: 'var(--ink-2)' }}>
+            &copy; 2026 ONEPEICE, Bengaluru
+          </p>
         </div>
       </div>
     </footer>

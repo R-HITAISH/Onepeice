@@ -5,12 +5,13 @@ import { ShoppingBag, User, Menu, X, LogOut } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Logo } from '@/components/Logo';
 
-export function Navbar() {
+export function Navbar({ onBagClick }: { onBagClick: () => void }) {
   const { itemCount } = useCart();
   const { user, signOut } = useAuth();
   const { path, navigate } = useRouter();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [bump, setBump] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     if (itemCount > 0) {
@@ -20,106 +21,114 @@ export function Navbar() {
     }
   }, [itemCount]);
 
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 1);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   const navItems = [
     { label: 'Shop', to: '/shop' },
     { label: 'Sell to us', to: '/sell' },
-    { label: 'About', to: '/about' },
   ];
 
-  return (
-    <header className="sticky top-0 z-50 bg-ink border-b-2 border-brass">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
-          <div className="flex items-center gap-10">
-            <Link to="/" className="flex items-center">
-              <Logo height={50} />
-            </Link>
-            <nav className="hidden md:flex items-center gap-7">
-              {navItems.map((item) => (
-                <Link
-                  key={item.to}
-                  to={item.to}
-                  className="nav-link font-body text-xs font-semibold text-ivory uppercase tracking-wider hover:text-brass transition-colors"
-                  aria-current={path === item.to ? 'page' : undefined}
-                >
-                  {item.label}
-                </Link>
-              ))}
-            </nav>
-          </div>
+  const closeMobile = () => setMobileOpen(false);
 
-          <div className="flex items-center gap-5">
-            <Link
-              to={user ? '/account' : '/auth'}
-              className="hidden sm:flex items-center gap-1.5 font-body text-xs font-semibold text-ivory uppercase tracking-wider hover:text-brass transition-colors"
-            >
-              <User size={16} />
-              {user ? 'Account' : 'Sign in'}
-            </Link>
-            {user && (
-              <button
-                onClick={() => signOut()}
-                className="hidden sm:flex items-center gap-1.5 font-body text-xs font-semibold text-ivory uppercase tracking-wider hover:text-brass transition-colors"
+  return (
+    <>
+      <header className="nav-bar sticky top-0 z-50" data-scrolled={scrolled}>
+        <div className="max-w-[1280px] mx-auto px-[clamp(1.25rem,4vw,3rem)]">
+          <div className="flex items-center justify-between h-16 md:h-20">
+            <div className="flex items-center gap-8 md:gap-12">
+              <Link to="/" className="flex items-center">
+                <Logo height={36} />
+              </Link>
+              <nav className="hidden md:flex items-center gap-7">
+                {navItems.map((item) => (
+                  <Link
+                    key={item.to}
+                    to={item.to}
+                    className="nav-link"
+                    aria-current={path === item.to ? 'page' : undefined}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </nav>
+            </div>
+
+            <div className="flex items-center gap-4 md:gap-5">
+              <Link
+                to={user ? '/account' : '/auth'}
+                className="flex items-center gap-1.5 nav-link"
+                aria-current={path === (user ? '/account' : '/auth') ? 'page' : undefined}
               >
-                <LogOut size={16} />
+                <User size={16} />
+                <span className="hidden sm:inline">Account</span>
+              </Link>
+
+              <button
+                onClick={onBagClick}
+                className="relative flex items-center gap-1.5 nav-link"
+                aria-label="Open bag"
+              >
+                <ShoppingBag size={16} />
+                <span className="hidden sm:inline">Bag</span>
+                {itemCount > 0 && (
+                  <span className={`cart-badge absolute -top-2 -right-2 bg-brass text-paper text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full ${bump ? 'bump' : ''}`}>
+                    {itemCount}
+                  </span>
+                )}
               </button>
-            )}
-            <Link
-              to="/cart"
-              className="relative flex items-center gap-1.5 text-brass hover:text-brass-hover transition-colors"
-            >
-              <ShoppingBag size={18} />
-              {itemCount > 0 && (
-                <span className={`cart-badge absolute -top-2 -right-2 bg-brass text-ink text-[10px] font-bold w-4 h-4 flex items-center justify-center ${bump ? 'bump' : ''}`}>
-                  {itemCount}
-                </span>
+
+              {user && (
+                <button
+                  onClick={() => signOut()}
+                  className="hidden md:flex items-center nav-link"
+                  aria-label="Sign out"
+                >
+                  <LogOut size={16} />
+                </button>
               )}
-            </Link>
-            <button
-              className="md:hidden text-ivory"
-              onClick={() => setMobileOpen(!mobileOpen)}
-            >
-              {mobileOpen ? <X size={22} /> : <Menu size={22} />}
-            </button>
+
+              <button
+                className="md:hidden flex items-center text-ink"
+                onClick={() => setMobileOpen(!mobileOpen)}
+                aria-label="Toggle menu"
+              >
+                {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+              </button>
+            </div>
           </div>
         </div>
-      </div>
+      </header>
 
+      {/* Mobile nav sheet */}
       {mobileOpen && (
-        <nav className="md:hidden bg-ink border-b border-grey-dark animate-fade-in">
-          <div className="px-4 py-4 space-y-3">
+        <div className="md:hidden fixed inset-0 z-40 bg-paper" style={{ paddingTop: '64px' }}>
+          <nav className="px-[clamp(1.25rem,4vw,3rem)] py-8">
             {navItems.map((item) => (
               <Link
                 key={item.to}
                 to={item.to}
-                onClick={() => setMobileOpen(false)}
-                className="block font-body text-xs font-semibold text-ivory uppercase tracking-wider hover:text-brass"
+                onClick={closeMobile}
+                className="block py-4 text-2xl font-display text-ink border-b border-[color:var(--hairline)]"
               >
                 {item.label}
               </Link>
             ))}
-            <Link
-              to={user ? '/account' : '/auth'}
-              onClick={() => setMobileOpen(false)}
-              className="block font-body text-xs font-semibold text-ivory uppercase tracking-wider hover:text-brass"
-            >
-              {user ? 'Account' : 'Sign in'}
-            </Link>
             {user && (
               <button
-                onClick={() => {
-                  signOut();
-                  setMobileOpen(false);
-                  navigate('/');
-                }}
-                className="block font-body text-xs font-semibold text-ivory uppercase tracking-wider hover:text-brass"
+                onClick={() => { signOut(); closeMobile(); navigate('/'); }}
+                className="block w-full text-left py-4 text-2xl font-display text-ink border-b border-[color:var(--hairline)]"
               >
                 Sign out
               </button>
             )}
-          </div>
-        </nav>
+          </nav>
+        </div>
       )}
-    </header>
+    </>
   );
 }

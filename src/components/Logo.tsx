@@ -2,9 +2,14 @@ type LogoProps = {
   className?: string;
   variant?: 'full' | 'mark';
   height?: number;
+  isNight?: boolean;
 };
 
-export function Logo({ className = '', variant = 'full', height = 50 }: LogoProps) {
+export function Logo({ className = '', variant = 'full', height = 40, isNight = false }: LogoProps) {
+  const stroke = '#A67C34';
+  const text = isNight ? '#F6F4EF' : '#141414';
+  const dotFill = '#A67C34';
+
   if (variant === 'mark') {
     return (
       <svg
@@ -14,16 +19,16 @@ export function Logo({ className = '', variant = 'full', height = 50 }: LogoProp
         style={{ height, width: 'auto' }}
       >
         <g transform="translate(90, 90)">
-          <circle cx="0" cy="0" r="40" fill="none" stroke="#a67c34" strokeWidth="3" pathLength={1} className="draw" />
+          <circle cx="0" cy="0" r="40" fill="none" stroke={stroke} strokeWidth="3" pathLength={1} className="draw" />
           <path
             d="M 0 -40 L 34 -20 L 34 20 L 0 40 L -34 20 L -34 -20 Z"
             fill="none"
-            stroke="#a67c34"
+            stroke={stroke}
             strokeWidth="2.5"
             pathLength={1}
             className="draw"
           />
-          <circle cx="0" cy="0" r="6" fill="#a67c34" className="dot" />
+          <circle cx="0" cy="0" r="6" fill={dotFill} className="dot" />
         </g>
       </svg>
     );
@@ -31,27 +36,29 @@ export function Logo({ className = '', variant = 'full', height = 50 }: LogoProp
 
   return (
     <svg
-      viewBox="0 0 500 160"
+      viewBox="0 0 500 100"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
       style={{ height, width: 'auto' }}
     >
-      <circle cx="50" cy="80" r="35" fill="none" stroke="#a67c34" strokeWidth="2.5" />
-      <path
-        d="M 50 50 L 70 62 L 70 98 L 50 110 L 30 98 L 30 62 Z"
-        fill="none"
-        stroke="#a67c34"
-        strokeWidth="2"
-      />
-      <circle cx="50" cy="80" r="5" fill="#a67c34" />
+      <g transform="translate(30, 50)">
+        <circle cx="0" cy="0" r="22" fill="none" stroke={stroke} strokeWidth="2" />
+        <path
+          d="M 0 -22 L 19 -11 L 19 11 L 0 22 L -19 11 L -19 -11 Z"
+          fill="none"
+          stroke={stroke}
+          strokeWidth="1.5"
+        />
+        <circle cx="0" cy="0" r="3.5" fill={dotFill} />
+      </g>
       <text
-        x="130"
-        y="95"
-        fontFamily="Impact, sans-serif"
-        fontSize="62"
-        fontWeight="900"
-        fill="#f5f3f0"
-        letterSpacing="2"
+        x="75"
+        y="62"
+        fontFamily="Fraunces, Georgia, serif"
+        fontSize="48"
+        fontWeight="400"
+        fill={text}
+        letterSpacing="1"
       >
         ONEPEICE
       </text>

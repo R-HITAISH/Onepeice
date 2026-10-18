@@ -3,7 +3,7 @@ import { supabase, type Item } from '@/lib/supabase';
 import { Link, useRouter } from '@/router/Router';
 import { useCart } from '@/context/CartContext';
 import { formatINR } from '@/lib/utils';
-import { ArrowLeft, ShoppingBag, Check, AlertTriangle, Clock } from 'lucide-react';
+import { ArrowLeft, ShoppingBag, AlertTriangle, ChevronDown } from 'lucide-react';
 
 export function ProductPage({ itemId }: { itemId: string }) {
   const { navigate } = useRouter();
@@ -12,8 +12,9 @@ export function ProductPage({ itemId }: { itemId: string }) {
   const [loading, setLoading] = useState(true);
   const [adding, setAdding] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState(false);
+  const [inBag, setInBag] = useState(false);
   const [activePhoto, setActivePhoto] = useState(0);
+  const [accordionOpen, setAccordionOpen] = useState(false);
 
   useEffect(() => {
     setLoading(true);
@@ -47,12 +48,11 @@ export function ProductPage({ itemId }: { itemId: string }) {
     if (!item) return;
     setAdding(true);
     setError(null);
-    setSuccess(false);
+    setInBag(false);
     const result = await addToCart(item.id);
     setAdding(false);
     if (result.success) {
-      setSuccess(true);
-      setTimeout(() => navigate('/cart'), 1200);
+      setInBag(true);
     } else {
       setError(result.error);
     }
@@ -60,13 +60,13 @@ export function ProductPage({ itemId }: { itemId: string }) {
 
   if (loading) {
     return (
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid md:grid-cols-2 gap-12">
-          <div className="aspect-[3/4] bg-ink-700 animate-pulse" />
+      <div className="page" style={{ paddingTop: '2rem', paddingBottom: '4rem' }}>
+        <div className="grid md:grid-cols-2 gap-10 lg:gap-16">
+          <div className="aspect-[4/5] animate-pulse" style={{ background: 'var(--sunken)' }} />
           <div className="space-y-4">
-            <div className="h-8 bg-ink-700 animate-pulse w-3/4" />
-            <div className="h-6 bg-ink-700 animate-pulse w-1/2" />
-            <div className="h-32 bg-ink-700 animate-pulse" />
+            <div className="h-8 animate-pulse w-3/4" style={{ background: 'var(--sunken)' }} />
+            <div className="h-6 animate-pulse w-1/2" style={{ background: 'var(--sunken)' }} />
+            <div className="h-32 animate-pulse" style={{ background: 'var(--sunken)' }} />
           </div>
         </div>
       </div>
@@ -75,14 +75,10 @@ export function ProductPage({ itemId }: { itemId: string }) {
 
   if (!item) {
     return (
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center">
-        <h1 className="font-display text-3xl mb-4" style={{ fontWeight: 400 }}>Item not found</h1>
-        <p className="label-quiet mb-6">
-          This piece doesn't exist or was removed.
-        </p>
-        <Link to="/shop" className="btn btn-dark">
-          Back to shop
-        </Link>
+      <div className="page text-center py-24">
+        <h1 style={{ fontWeight: 400 }}>Item not found</h1>
+        <p className="label mt-4 mb-6">This piece doesn't exist or was removed.</p>
+        <Link to="/shop" className="btn btn-secondary">Back to shop</Link>
       </div>
     );
   }
@@ -91,118 +87,123 @@ export function ProductPage({ itemId }: { itemId: string }) {
   const locked = item.status === 'locked';
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
-      <Link
-        to="/shop"
-        className="inline-flex items-center gap-2 font-body text-sm text-grey-light hover:text-brass mb-8 transition-colors"
-      >
+    <div className="page" style={{ paddingTop: '1.5rem', paddingBottom: '4rem' }}>
+      <Link to="/shop" className="inline-flex items-center gap-2 text-sm mb-8" style={{ color: 'var(--ink-2)' }}>
         <ArrowLeft size={15} />
         Back to shop
       </Link>
 
-      <div className="grid md:grid-cols-2 gap-10 lg:gap-16">
-        {/* Photos */}
+      <div className="grid md:grid-cols-2 gap-8 lg:gap-16">
+        {/* Gallery */}
         <div>
-          <div className="aspect-[3/4] bg-ink-700 overflow-hidden relative">
-            <img
-              src={item.photos[activePhoto] ?? item.photos[0] ?? ''}
-              alt={item.name}
-              className={`w-full h-full object-cover ${sold ? 'grayscale opacity-70' : ''}`}
-            />
-            {sold && (
-              <div className="absolute top-5 left-5">
-                <span className="tag tag-sold">Sold</span>
+          {/* Desktop: stacked gallery */}
+          <div className="hidden md:block space-y-4">
+            <div className="product-media aspect-[4/5]">
+              <img
+                src={item.photos[activePhoto] ?? item.photos[0] ?? ''}
+                alt={item.name}
+                className={`w-full h-full object-cover ${sold ? 'grayscale opacity-60' : ''}`}
+              />
+            </div>
+            {item.photos.length > 1 && (
+              <div className="flex gap-3">
+                {item.photos.map((photo, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setActivePhoto(i)}
+                    className={`product-media w-20 h-20 overflow-hidden border-2 ${i === activePhoto ? '' : 'opacity-60'}`}
+                    style={{ borderColor: i === activePhoto ? 'var(--ink)' : 'transparent' }}
+                  >
+                    <img src={photo} alt={`${item.name} photo ${i + 1}`} className="w-full h-full object-cover" />
+                  </button>
+                ))}
               </div>
             )}
           </div>
-          {item.photos.length > 1 && (
-            <div className="flex gap-3 mt-4">
-              {item.photos.map((photo, i) => (
-                <button
-                  key={i}
-                  onClick={() => setActivePhoto(i)}
-                  className={`w-20 h-20 overflow-hidden border transition-colors ${
-                    i === activePhoto ? 'border-brass' : 'border-grey-dark hover:border-ink'
-                  }`}
-                >
-                  <img src={photo} alt="" className="w-full h-full object-cover" />
-                </button>
-              ))}
-            </div>
-          )}
+
+          {/* Mobile: horizontal scroll-snap strip */}
+          <div className="md:hidden scroll-snap-x flex gap-2 -mx-[clamp(1.25rem,4vw,3rem)] px-[clamp(1.25rem,4vw,3rem)]">
+            {item.photos.length > 0 ? item.photos.map((photo, i) => (
+              <div key={i} className="scroll-snap-item product-media aspect-[3/4] w-[75vw]">
+                <img
+                  src={photo}
+                  alt={`${item.name} photo ${i + 1}`}
+                  className={`w-full h-full object-cover ${sold ? 'grayscale opacity-60' : ''}`}
+                />
+              </div>
+            )) : (
+              <div className="scroll-snap-item product-media aspect-[3/4] w-[75vw]" />
+            )}
+          </div>
         </div>
 
-        {/* Details */}
-        <div className="pt-2">
-          {item.brand && (
-            <p className="label-quiet mb-3">{item.brand}</p>
-          )}
-          <h1 className="font-display text-3xl md:text-4xl leading-tight mb-5" style={{ fontWeight: 400 }}>
+        {/* Info column */}
+        <div className="md:sticky md:top-24 md:self-start">
+          <p className="label mb-2" style={{ color: 'var(--brass-text)' }}>1 of 1</p>
+          <h1 className="font-display text-3xl md:text-4xl mb-4" style={{ fontWeight: 400 }}>
             {item.name}
           </h1>
 
-          <div className="flex items-baseline gap-3 mb-8">
-            <span className="font-body text-2xl font-medium">{formatINR(item.price_inr)}</span>
-            <span className="label-quiet">1 of 1</span>
-            {locked && !sold && (
-              <span className="flex items-center gap-1 label-quiet text-brass ml-2">
-                <Clock size={13} />
-                Reserved by another buyer
-              </span>
-            )}
-          </div>
+          {!sold && (
+            <p className="price text-xl text-ink mb-8">{formatINR(item.price_inr)}</p>
+          )}
 
-          <div className="grid grid-cols-3 gap-0 mb-8 border-t border-b border-grey-dark">
-            <div className="py-4 pr-4 border-r border-grey-dark">
-              <p className="label-quiet mb-1">Size</p>
-              <p className="font-body text-sm">{item.size}</p>
-            </div>
-            <div className="py-4 px-4 border-r border-grey-dark">
-              <p className="label-quiet mb-1">Category</p>
-              <p className="font-body text-sm">{item.category}</p>
-            </div>
-            <div className="py-4 pl-4">
-              <p className="label-quiet mb-1">Condition</p>
-              <p className="font-body text-sm">{item.condition}</p>
+          {/* Info table */}
+          <div className="hairline-t hairline-b mb-8">
+            <div className="grid grid-cols-2">
+              <div className="py-4 pr-4 hairline-r hairline-b">
+                <p className="label mb-1">Size</p>
+                <p className="text-sm text-ink">{item.size}</p>
+              </div>
+              <div className="py-4 pl-4 hairline-b">
+                <p className="label mb-1">Brand</p>
+                <p className="text-sm text-ink">{item.brand ?? '—'}</p>
+              </div>
+              <div className="py-4 pr-4 hairline-r">
+                <p className="label mb-1">Condition</p>
+                <p className="text-sm text-ink">{item.condition}</p>
+              </div>
+              <div className="py-4 pl-4">
+                <p className="label mb-1">Measurements</p>
+                <p className="text-sm text-ink">{item.measurements ?? '—'}</p>
+              </div>
             </div>
           </div>
 
           {item.description && (
             <div className="mb-8">
-              <h3 className="label-quiet mb-2">Description</h3>
-              <p className="font-body text-sm leading-relaxed text-ivory/80">{item.description}</p>
+              <p className="text-sm leading-relaxed text-ink">{item.description}</p>
             </div>
           )}
 
-          {item.measurements && (
-            <div className="mb-8">
-              <h3 className="label-quiet mb-2">Measurements</h3>
-              <p className="font-body text-sm leading-relaxed text-ivory/80">{item.measurements}</p>
-            </div>
-          )}
-
-          {/* Add to cart */}
-          <div className="mt-10">
+          {/* Action area */}
+          <div className="mb-8">
             {sold ? (
-              <button disabled className="btn btn-dark w-full opacity-50 cursor-not-allowed">
-                Sold
+              <div className="space-y-4">
+                <p className="font-display text-2xl" style={{ fontWeight: 400, color: 'var(--ink-2)' }}>Sold</p>
+                <Link to="/shop" className="text-link">See similar pieces</Link>
+              </div>
+            ) : inBag ? (
+              <button
+                onClick={() => navigate('/checkout')}
+                className="btn btn-success w-full md:w-[320px]"
+              >
+                In your bag — Checkout
               </button>
-            ) : success ? (
-              <div className="flex items-center justify-center gap-2 p-4 text-brass font-body text-sm">
-                <Check size={18} />
-                Added to bag — redirecting...
+            ) : locked ? (
+              <div className="space-y-3">
+                <button disabled className="btn btn-secondary w-full md:w-[320px]">
+                  Reserved by another shopper
+                </button>
+                <Link to="/shop" className="text-link block">Back to shop</Link>
               </div>
             ) : (
               <button
                 onClick={handleAddToCart}
-                disabled={adding || locked}
-                className="btn btn-primary w-full disabled:opacity-40 disabled:cursor-not-allowed"
+                disabled={adding}
+                className="btn btn-primary w-full md:w-[320px]"
               >
-                {adding ? (
-                  'Reserving...'
-                ) : locked ? (
-                  'Currently reserved'
-                ) : (
+                {adding ? 'Reserving…' : (
                   <>
                     <ShoppingBag size={15} />
                     Add to bag
@@ -212,17 +213,35 @@ export function ProductPage({ itemId }: { itemId: string }) {
             )}
 
             {error && (
-              <div className="mt-4 flex items-start gap-2 p-3 text-error font-body text-sm">
-                <AlertTriangle size={15} className="shrink-0 mt-0.5" />
+              <p className="mt-4 text-sm" style={{ color: 'var(--error)' }}>
+                <AlertTriangle size={14} className="inline mr-1" />
                 {error}
-              </div>
-            )}
-
-            {!sold && !locked && (
-              <p className="mt-4 label-quiet text-center">
-                Adding to bag reserves this item for 10 minutes.
               </p>
             )}
+
+            {!sold && !locked && !inBag && (
+              <p className="label mt-4">Adding to bag reserves this item for 10 minutes.</p>
+            )}
+          </div>
+
+          {/* Accordion: Delivery and returns */}
+          <div className="hairline-t">
+            <button
+              onClick={() => setAccordionOpen(!accordionOpen)}
+              className="flex items-center justify-between w-full py-4 text-sm font-medium text-ink"
+            >
+              Delivery and returns
+              <ChevronDown
+                size={16}
+                style={{ transform: accordionOpen ? 'rotate(180deg)' : 'none', transition: 'transform 200ms var(--ease-out)' }}
+              />
+            </button>
+            <div className="accordion-content" data-open={accordionOpen}>
+              <div className="pb-4 text-sm leading-relaxed" style={{ color: 'var(--ink-2)' }}>
+                <p className="mb-2">We ship across India within 2–7 business days. 7-day returns for items that arrive damaged or don't match the description.</p>
+                <Link to="/refund-shipping" className="text-link">Read the full policy</Link>
+              </div>
+            </div>
           </div>
         </div>
       </div>
