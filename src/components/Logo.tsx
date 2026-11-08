@@ -60,7 +60,7 @@ export function Logo({ className = '', variant = 'full', height = 40, isNight = 
         fill={text}
         letterSpacing="1"
       >
-        ONEPIECE
+        ONEEEPIIECE
       </text>
     </svg>
   );

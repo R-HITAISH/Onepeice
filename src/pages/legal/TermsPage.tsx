@@ -17,8 +17,8 @@ export function TermsPage() {
           <section>
             <h2 className="font-display text-xl mb-3 pt-6 hairline-t" style={{ fontWeight: 400 }}>1. Acceptance of Terms</h2>
             <p>
-              By accessing or using ONEPIECE (the "Platform"), you agree to be bound by these Terms of Service
-              ("Terms"). If you do not agree to these Terms, please do not use the Platform. ONEPIECE operates
+              By accessing or using ONEEEPIIECE (the "Platform"), you agree to be bound by these Terms of Service
+              ("Terms"). If you do not agree to these Terms, please do not use the Platform. ONEEEPIIECE operates
               as a resale platform for one-of-one thrifted and secondhand streetwear. Every item listed is a
               single, unique physical unit. Once an item is sold, it is permanently removed from circulation
               and is never restocked or reproduced.
@@ -45,7 +45,7 @@ export function TermsPage() {
           <section>
             <h2 className="font-display text-xl mb-3 pt-6 hairline-t" style={{ fontWeight: 400 }}>3. Cart Reservation System</h2>
             <p className="mb-3">
-              When you add an item to your bag, ONEPIECE places a 10-minute reservation ("lock") on that item.
+              When you add an item to your bag, ONEEEPIIECE places a 10-minute reservation ("lock") on that item.
               During this lock period:
             </p>
             <ul className="list-disc pl-5 space-y-1.5">
@@ -55,7 +55,7 @@ export function TermsPage() {
               <li>You may release a lock manually by removing the item from your bag.</li>
             </ul>
             <p className="mt-3">
-              ONEPIECE does not guarantee that an item will remain available after a lock expires. Another user
+              ONEEEPIIECE does not guarantee that an item will remain available after a lock expires. Another user
               may reserve or purchase the item immediately after your lock lapses.
             </p>
           </section>
@@ -64,7 +64,7 @@ export function TermsPage() {
             <h2 className="font-display text-xl mb-3 pt-6 hairline-t" style={{ fontWeight: 400 }}>4. Purchasing and Payment</h2>
             <p className="mb-3">
               All prices are listed in Indian Rupees (INR). Payments are processed through Razorpay, a PCI-DSS
-              compliant payment gateway. ONEPIECE does not store your card, UPI, or banking details on its
+              compliant payment gateway. ONEEEPIIECE does not store your card, UPI, or banking details on its
               servers. By completing a purchase, you:
             </p>
             <ul className="list-disc pl-5 space-y-1.5">
@@ -86,7 +86,7 @@ export function TermsPage() {
             <ul className="list-disc pl-5 space-y-1.5">
               <li><strong>Refundable:</strong> Items that arrive damaged, are the wrong item, or do not match the description or condition grade listed on the Platform.</li>
               <li><strong>Non-refundable:</strong> Change of mind, items that no longer fit, or items damaged by the buyer after delivery.</li>
-              <li>Returns must be initiated within 7 days of delivery by contacting support@onepiece.in with your order reference and photos of the issue.</li>
+              <li>Returns must be initiated within 7 days of delivery by contacting support@oneeepiiece.in with your order reference and photos of the issue.</li>
               <li>Approved refunds are processed to the original payment method within 5-7 business days.</li>
             </ul>
             <p className="mt-3">
@@ -103,10 +103,10 @@ export function TermsPage() {
               <li>You own the item outright and have the right to sell it.</li>
               <li>The item is not counterfeit, stolen, or subject to any legal dispute.</li>
               <li>You have disclosed all defects, damage, and wear honestly in your submission.</li>
-              <li>You agree to ONEPIECE's pricing and commission structure, if your submission is approved.</li>
+              <li>You agree to ONEEEPIIECE's pricing and commission structure, if your submission is approved.</li>
             </ul>
             <p className="mt-3">
-              ONEPIECE reserves the right to reject any submission without explanation. Approved submissions
+              ONEEEPIIECE reserves the right to reject any submission without explanation. Approved submissions
               are inspected in person before listing. If the item does not match the submitted description,
               it may be returned to the seller at the seller's expense.
             </p>
@@ -115,7 +115,7 @@ export function TermsPage() {
           <section>
             <h2 className="font-display text-xl mb-3 pt-6 hairline-t" style={{ fontWeight: 400 }}>7. Dispute Resolution</h2>
             <p className="mb-3">
-              If you have a dispute regarding a purchase or sale, please first contact us at support@onepiece.in
+              If you have a dispute regarding a purchase or sale, please first contact us at support@oneeepiiece.in
               within 3 days of the issue arising. We will attempt to resolve the matter directly. If the dispute
               cannot be resolved within 14 days of your initial contact, the matter shall be referred to
               arbitration in Bengaluru, India, under the Arbitration and Conciliation Act, 1996. The arbitral
@@ -127,7 +127,7 @@ export function TermsPage() {
           <section>
             <h2 className="font-display text-xl mb-3 pt-6 hairline-t" style={{ fontWeight: 400 }}>8. Limitation of Liability</h2>
             <p>
-              ONEPIECE shall not be liable for indirect, incidental, or consequential damages arising from your
+              ONEEEPIIECE shall not be liable for indirect, incidental, or consequential damages arising from your
               use of the Platform. Our total liability for any claim shall not exceed the amount you paid for
               the specific item that is the subject of the dispute.
             </p>
@@ -153,7 +153,7 @@ export function TermsPage() {
           <section>
             <h2 className="font-display text-xl mb-3 pt-6 hairline-t" style={{ fontWeight: 400 }}>11. Contact</h2>
             <p>
-              For any questions about these Terms, email us at support@onepiece.in.
+              For any questions about these Terms, email us at support@oneeepiiece.in.
             </p>
           </section>
         </div>

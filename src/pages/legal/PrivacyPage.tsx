@@ -58,7 +58,7 @@ export function PrivacyPage() {
               certified. We do not have access to your raw payment instrument details at any point.
             </p>
             <p>
-              Access to personal data within ONEPIECE is restricted to authorized personnel who require it for
+              Access to personal data within ONEEEPIIECE is restricted to authorized personnel who require it for
               order fulfillment and support. We use row-level security policies to ensure that users can only
               access their own order and account data.
             </p>
@@ -91,7 +91,7 @@ export function PrivacyPage() {
               <li><strong>Data portability:</strong> Receive your data in a structured, machine-readable format.</li>
             </ul>
             <p className="mt-3">
-              To exercise any of these rights, email support@onepiece.in. We will respond within 30 days.
+              To exercise any of these rights, email support@oneeepiiece.in. We will respond within 30 days.
             </p>
           </section>
 
@@ -111,7 +111,7 @@ export function PrivacyPage() {
               If you choose to sign in with Google, we receive your Google account email address and basic
               profile information (name, profile picture URL) through Google's OAuth 2.0 API. We use this
               information solely for account identification. We do not access your Google contacts, Gmail,
-              Google Drive, or any other Google services. You can revoke ONEPIECE's access to your Google
+              Google Drive, or any other Google services. You can revoke ONEEEPIIECE's access to your Google
               account at any time through your Google Account security settings.
             </p>
           </section>
@@ -128,7 +128,7 @@ export function PrivacyPage() {
           <section>
             <h2 className="font-display text-xl mb-3 pt-6 hairline-t" style={{ fontWeight: 400 }}>10. Contact</h2>
             <p>
-              For privacy questions or to exercise your data rights, email support@onepiece.in.
+              For privacy questions or to exercise your data rights, email support@oneeepiiece.in.
             </p>
           </section>
         </div>

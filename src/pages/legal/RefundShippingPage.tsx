@@ -45,7 +45,7 @@ export function RefundShippingPage() {
             </p>
             <ul className="list-disc pl-5 space-y-1.5">
               <li>The item must be in the same condition as received — unworn, with original tags if any were included.</li>
-              <li>You must contact support@onepiece.in within 7 days of delivery with your order reference and a description of the issue.</li>
+              <li>You must contact support@oneeepiiece.in within 7 days of delivery with your order reference and a description of the issue.</li>
               <li>Photos of the item showing the damage or discrepancy must be provided.</li>
             </ul>
           </section>
@@ -78,7 +78,7 @@ export function RefundShippingPage() {
           <section>
             <h2 className="font-display text-xl mb-3 pt-6 hairline-t" style={{ fontWeight: 400 }}>6. Return Shipping Costs</h2>
             <ul className="list-disc pl-5 space-y-1.5">
-              <li><strong>ONEPIECE error:</strong> If the return is due to our mistake (wrong item, damaged, or misdescribed), return shipping is free. We will arrange a pickup at no cost to you.</li>
+              <li><strong>ONEEEPIIECE error:</strong> If the return is due to our mistake (wrong item, damaged, or misdescribed), return shipping is free. We will arrange a pickup at no cost to you.</li>
               <li><strong>Buyer remorse:</strong> If you are returning due to change of mind or sizing, return shipping costs are borne by the buyer. The original shipping fee is non-refundable.</li>
             </ul>
           </section>
@@ -89,9 +89,9 @@ export function RefundShippingPage() {
               If you are unsatisfied with your order or our response, follow this escalation process:
             </p>
             <ul className="list-decimal pl-5 space-y-1.5">
-              <li><strong>Direct contact (3 days):</strong> Email support@onepiece.in with your order reference and issue. We will respond within 48 hours and attempt to resolve the matter directly.</li>
-              <li><strong>ONEPIECE review:</strong> If the matter is not resolved in the first 3 days, it is escalated to our operations lead for a final review. You will receive a decision within 5 business days.</li>
-              <li><strong>Final decision:</strong> ONEPIECE's decision after the review is final. For matters that remain unresolved, arbitration provisions in our Terms of Service apply.</li>
+              <li><strong>Direct contact (3 days):</strong> Email support@oneeepiiece.in with your order reference and issue. We will respond within 48 hours and attempt to resolve the matter directly.</li>
+              <li><strong>ONEEEPIIECE review:</strong> If the matter is not resolved in the first 3 days, it is escalated to our operations lead for a final review. You will receive a decision within 5 business days.</li>
+              <li><strong>Final decision:</strong> ONEEEPIIECE's decision after the review is final. For matters that remain unresolved, arbitration provisions in our Terms of Service apply.</li>
             </ul>
           </section>
 
@@ -106,7 +106,7 @@ export function RefundShippingPage() {
           <section>
             <h2 className="font-display text-xl mb-3 pt-6 hairline-t" style={{ fontWeight: 400 }}>9. Contact</h2>
             <p>
-              For returns, refunds, or shipping questions, email support@onepiece.in. Support hours are
+              For returns, refunds, or shipping questions, email support@oneeepiiece.in. Support hours are
               Monday to Friday, 10 AM to 6 PM IST. We aim to respond to all queries within 48 hours.
             </p>
           </section>

@@ -1,0 +1,17 @@
+{
+  "projectId": "70715321",
+  "functions": {
+    "razorpay-create-order": {
+      "hasChanged": false,
+      "hash": "660bf91e0d26b20edda238bcb21cdd81ee02007c5dce85f9454e23cb71d2741a"
+    },
+    "razorpay-verify": {
+      "hasChanged": false,
+      "hash": "d7bdc5a08b83d8fe8e40255362d506a1a7615346846feae8fd4f468617b96513"
+    },
+    "release-expired-locks": {
+      "hasChanged": false,
+      "hash": "4a27da886ffdf76c051255b444e780a179dd413bdfd99ac118cd71ec3984c676"
+    }
+  }
+}

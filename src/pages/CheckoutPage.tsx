@@ -96,7 +96,7 @@ export function CheckoutPage() {
       const orderInsert: Record<string, unknown> = {
         status: 'pending',
         total_inr: total,
-        session_id: localStorage.getItem('onepiece_session_id'),
+        session_id: localStorage.getItem('oneeepiiece_session_id'),
         shipping_name: form.name,
         shipping_address: form.address,
         shipping_city: form.city,
@@ -149,7 +149,7 @@ export function CheckoutPage() {
         key: razorpayData.key_id,
         amount: total * 100,
         currency: 'INR',
-        name: 'ONEPIECE',
+        name: 'ONEEEPIIECE',
         description: 'One-of-one streetwear purchase',
         order_id: razorpayOrderId,
         prefill: { name: form.name, contact: form.phone },

@@ -1,8 +1,8 @@
 export function getSessionId(): string {
-  let id = localStorage.getItem('onepiece_session_id');
+  let id = localStorage.getItem('oneeepiiece_session_id');
   if (!id) {
     id = crypto.randomUUID();
-    localStorage.setItem('onepiece_session_id', id);
+    localStorage.setItem('oneeepiiece_session_id', id);
   }
   return id;
 }
