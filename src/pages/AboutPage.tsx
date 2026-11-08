@@ -7,7 +7,7 @@ export function AboutPage() {
       {/* Hero — night band */}
       <section style={{ backgroundColor: 'var(--night)', color: 'var(--night-ink)' }}>
         <div className="page" style={{ paddingTop: 'clamp(4rem,8vw,8rem)', paddingBottom: 'clamp(4rem,8vw,8rem)' }}>
-          <p className="label mb-6" style={{ color: 'var(--brass)' }}>About ONEPEICE</p>
+          <p className="label mb-6" style={{ color: 'var(--brass)' }}>About ONEPIECE</p>
           <h1 className="max-w-2xl" style={{ fontWeight: 400, color: 'var(--night-ink)' }}>
             We don't sell clothes.
             <br />

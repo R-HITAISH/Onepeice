@@ -86,7 +86,7 @@ export function TermsPage() {
             <ul className="list-disc pl-5 space-y-1.5">
               <li><strong>Refundable:</strong> Items that arrive damaged, are the wrong item, or do not match the description or condition grade listed on the Platform.</li>
               <li><strong>Non-refundable:</strong> Change of mind, items that no longer fit, or items damaged by the buyer after delivery.</li>
-              <li>Returns must be initiated within 7 days of delivery by contacting support@onepeice.in with your order reference and photos of the issue.</li>
+              <li>Returns must be initiated within 7 days of delivery by contacting support@onepiece.in with your order reference and photos of the issue.</li>
               <li>Approved refunds are processed to the original payment method within 5-7 business days.</li>
             </ul>
             <p className="mt-3">
@@ -115,7 +115,7 @@ export function TermsPage() {
           <section>
             <h2 className="font-display text-xl mb-3 pt-6 hairline-t" style={{ fontWeight: 400 }}>7. Dispute Resolution</h2>
             <p className="mb-3">
-              If you have a dispute regarding a purchase or sale, please first contact us at support@onepeice.in
+              If you have a dispute regarding a purchase or sale, please first contact us at support@onepiece.in
               within 3 days of the issue arising. We will attempt to resolve the matter directly. If the dispute
               cannot be resolved within 14 days of your initial contact, the matter shall be referred to
               arbitration in Bengaluru, India, under the Arbitration and Conciliation Act, 1996. The arbitral
@@ -153,7 +153,7 @@ export function TermsPage() {
           <section>
             <h2 className="font-display text-xl mb-3 pt-6 hairline-t" style={{ fontWeight: 400 }}>11. Contact</h2>
             <p>
-              For any questions about these Terms, email us at support@onepeice.in.
+              For any questions about these Terms, email us at support@onepiece.in.
             </p>
           </section>
         </div>

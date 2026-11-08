@@ -91,7 +91,7 @@ export function PrivacyPage() {
               <li><strong>Data portability:</strong> Receive your data in a structured, machine-readable format.</li>
             </ul>
             <p className="mt-3">
-              To exercise any of these rights, email support@onepeice.in. We will respond within 30 days.
+              To exercise any of these rights, email support@onepiece.in. We will respond within 30 days.
             </p>
           </section>
 
@@ -128,7 +128,7 @@ export function PrivacyPage() {
           <section>
             <h2 className="font-display text-xl mb-3 pt-6 hairline-t" style={{ fontWeight: 400 }}>10. Contact</h2>
             <p>
-              For privacy questions or to exercise your data rights, email support@onepeice.in.
+              For privacy questions or to exercise your data rights, email support@onepiece.in.
             </p>
           </section>
         </div>
