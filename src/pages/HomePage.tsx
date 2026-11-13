@@ -5,8 +5,6 @@ import { ItemCard } from '@/components/ItemCard';
 import { Logo } from '@/components/Logo';
 import { ArrowDown, ArrowRight } from 'lucide-react';
 
-const fallbackPhoto = 'https://images.pexels.com/photos/5675657/pexels-photo-5675657.jpeg?auto=compress&cs=tinysrgb&w=1800';
-
 export function HomePage() {
   const [featured, setFeatured] = useState<Item[]>([]);
   const [loading, setLoading] = useState(true);
@@ -64,29 +62,28 @@ export function HomePage() {
     };
   }, [featured.length]);
 
-  const heroPhoto = featured[0]?.photos?.[0] ?? fallbackPhoto;
-
   return (
     <div className="home-editorial">
       <section ref={heroRef} className="campaign-hero" aria-labelledby="hero-title">
-        <div className="campaign-hero__image-wrap" aria-hidden="true">
-          <div className="campaign-hero__image" style={{ backgroundImage: `url("${heroPhoto}")` }} />
-          <div className="campaign-hero__veil" />
-          <div className="campaign-hero__frame" />
+        <div className="campaign-hero__visual" aria-label="ONEEEPIIECE animated brand emblem">
+          <div className="brand-orbit brand-orbit--outer" aria-hidden="true" />
+          <div className="brand-orbit brand-orbit--inner" aria-hidden="true" />
+          <div className="brand-emblem-3d">
+            <div className="brand-emblem-3d__face"><Logo variant="mark" height={210} className="campaign-hero__mark" /></div>
+          </div>
+          <Logo className="campaign-hero__wordmark" height={34} />
+          <p className="campaign-hero__signature">FOUND ONCE <span>·</span> KEPT FOREVER</p>
+          <span className="brand-serial brand-serial--top" aria-hidden="true">O.P. / 01</span>
+          <span className="brand-serial brand-serial--bottom" aria-hidden="true">ONE OF ONE, ALWAYS</span>
         </div>
         <div className="campaign-hero__copy">
-          <p className="eyebrow campaign-hero__eyebrow"><span /> A considered collection · India</p>
-          <h1 id="hero-title">Every piece<br /><em>has a story.</em></h1>
-          <p className="campaign-hero__intro">Uncommon clothes, found once.<br className="hidden sm:block" /> Chosen to be lived in again.</p>
+          <p className="eyebrow campaign-hero__eyebrow"><span /> An independent clothing label · India</p>
+          <h1 id="hero-title">Found once.<br /><em>Kept forever.</em></h1>
+          <p className="campaign-hero__intro">Singular pieces, chosen with intention.<br className="hidden sm:block" /> A little history. A life still ahead.</p>
           <Link to="/shop" className="campaign-link">
             Explore the collection <span className="campaign-link__icon"><ArrowRight size={16} /></span>
           </Link>
-          <div className="campaign-hero__edition"><span>01</span><i /> One of one, always</div>
-        </div>
-        <div className="campaign-hero__stamp" aria-hidden="true">
-          <Logo variant="mark" height={78} className="campaign-hero__mark" />
-          <span>ONEEEPIIECE</span>
-          <small>Found once · kept forever</small>
+          <div className="campaign-hero__edition"><span>01</span><i /> Clothing with a past, made for what comes next</div>
         </div>
         <a className="campaign-hero__scroll" href="#new-in" aria-label="Scroll to new arrivals"><span>Scroll to discover</span><ArrowDown size={15} /></a>
       </section>
