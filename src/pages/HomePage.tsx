@@ -1,14 +1,19 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { supabase, type Item } from '@/lib/supabase';
 import { Link } from '@/router/Router';
 import { ItemCard } from '@/components/ItemCard';
-import { ArrowRight } from 'lucide-react';
+import { Logo } from '@/components/Logo';
+import { ArrowDown, ArrowRight } from 'lucide-react';
+
+const fallbackPhoto = 'https://images.pexels.com/photos/5675657/pexels-photo-5675657.jpeg?auto=compress&cs=tinysrgb&w=1800';
 
 export function HomePage() {
   const [featured, setFeatured] = useState<Item[]>([]);
   const [loading, setLoading] = useState(true);
+  const heroRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
+    let active = true;
     supabase
       .from('items')
       .select('*')
@@ -16,114 +21,141 @@ export function HomePage() {
       .order('created_at', { ascending: false })
       .limit(4)
       .then(({ data }) => {
+        if (!active) return;
         if (data) setFeatured(data);
         setLoading(false);
       });
+    return () => { active = false; };
   }, []);
 
-  const heroPhoto = featured[0]?.photos?.[0] ?? 'https://images.pexels.com/photos/5675657/pexels-photo-5675657.jpeg?auto=compress&cs=tinysrgb&w=1600';
+  useEffect(() => {
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const revealNodes = Array.from(document.querySelectorAll<HTMLElement>('[data-reveal]'));
+    if (reducedMotion) {
+      revealNodes.forEach((node) => node.classList.add('is-visible'));
+      return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.14, rootMargin: '0px 0px -40px 0px' });
+    revealNodes.forEach((node) => observer.observe(node));
+
+    const hero = heroRef.current;
+    let frame = 0;
+    const onScroll = () => {
+      if (!hero || frame) return;
+      frame = window.requestAnimationFrame(() => {
+        const distance = Math.max(0, window.scrollY - hero.offsetTop);
+        hero.style.setProperty('--hero-scroll', `${Math.min(distance * 0.22, 150)}px`);
+        frame = 0;
+      });
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('scroll', onScroll);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
+  }, [featured.length]);
+
+  const heroPhoto = featured[0]?.photos?.[0] ?? fallbackPhoto;
 
   return (
-    <div>
-      {/* Hero */}
-      <section className="relative w-full" style={{ height: '90vh', minHeight: '480px' }}>
-        <div className="absolute inset-0 overflow-hidden">
-          <img
-            src={heroPhoto}
-            alt={featured[0]?.name ?? 'Thrifted streetwear'}
-            className="w-full h-full object-cover"
-          />
+    <div className="home-editorial">
+      <section ref={heroRef} className="campaign-hero" aria-labelledby="hero-title">
+        <div className="campaign-hero__image-wrap" aria-hidden="true">
+          <div className="campaign-hero__image" style={{ backgroundImage: `url("${heroPhoto}")` }} />
+          <div className="campaign-hero__veil" />
+          <div className="campaign-hero__frame" />
         </div>
-        <div className="absolute inset-0 flex items-end" style={{ background: 'linear-gradient(to top, rgba(246,244,239,0.9) 0%, rgba(246,244,239,0.3) 40%, transparent 70%)' }}>
-          <div className="page w-full pb-12 md:pb-16">
-            <div className="max-w-2xl">
-              <h1 className="font-display text-ink mb-3" style={{ fontWeight: 400 }}>
-                One of one.
-              </h1>
-              <p className="text-lg md:text-xl text-ink-2 mb-8" style={{ color: 'var(--ink-2)' }}>
-                Thrifted pieces, never restocked.
-              </p>
-              <Link to="/shop" className="btn btn-primary">
-                Shop the drop
-                <ArrowRight size={16} />
-              </Link>
-            </div>
-          </div>
+        <div className="campaign-hero__copy">
+          <p className="eyebrow campaign-hero__eyebrow"><span /> A considered collection · India</p>
+          <h1 id="hero-title">Every piece<br /><em>has a story.</em></h1>
+          <p className="campaign-hero__intro">Uncommon clothes, found once.<br className="hidden sm:block" /> Chosen to be lived in again.</p>
+          <Link to="/shop" className="campaign-link">
+            Explore the collection <span className="campaign-link__icon"><ArrowRight size={16} /></span>
+          </Link>
+          <div className="campaign-hero__edition"><span>01</span><i /> One of one, always</div>
         </div>
+        <div className="campaign-hero__stamp" aria-hidden="true">
+          <Logo variant="mark" height={78} className="campaign-hero__mark" />
+          <span>ONEEEPIIECE</span>
+          <small>Found once · kept forever</small>
+        </div>
+        <a className="campaign-hero__scroll" href="#new-in" aria-label="Scroll to new arrivals"><span>Scroll to discover</span><ArrowDown size={15} /></a>
       </section>
 
-      {/* New in */}
-      <section className="page" style={{ paddingTop: 'clamp(60px, 10vw, 120px)', paddingBottom: 'clamp(60px, 10vw, 120px)' }}>
-        <div className="flex items-end justify-between mb-10 md:mb-14">
-          <h2 style={{ fontWeight: 400 }}>New in</h2>
-          <Link to="/shop" className="text-link">
-            View all
-          </Link>
+      <section id="new-in" className="home-section new-in-section">
+        <div className="section-heading" data-reveal>
+          <div>
+            <p className="eyebrow">The current edit <span> / 01</span></p>
+            <h2>Newly found</h2>
+          </div>
+          <Link to="/shop" className="text-link section-heading__link">View all pieces <ArrowRight size={15} /></Link>
         </div>
 
         {loading ? (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[14px] md:gap-6">
-            {Array.from({ length: 4 }).map((_, i) => (
-              <div key={i} className="aspect-[4/5] animate-pulse" style={{ background: 'var(--sunken)' }} />
-            ))}
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+            {Array.from({ length: 4 }).map((_, i) => <div key={i} className="aspect-[4/5] animate-pulse" style={{ background: 'var(--sunken)' }} />)}
           </div>
         ) : featured.length === 0 ? (
-          <div className="text-center py-20">
-            <p className="label">The drop is empty. Check back soon.</p>
-          </div>
+          <div className="empty-edit" data-reveal><Logo variant="mark" height={48} /><p className="label">The next edit is being gathered. Check back soon.</p></div>
         ) : (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[14px] md:gap-6">
-            {featured.map((item, i) => (
-              <ItemCard key={item.id} item={item} index={i} />
-            ))}
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+            {featured.map((item, i) => <div key={item.id} data-reveal style={{ transitionDelay: `${i * 80}ms` }}><ItemCard item={item} index={i} /></div>)}
           </div>
         )}
       </section>
 
-      {/* Night band */}
-      <section style={{ backgroundColor: 'var(--night)', color: 'var(--night-ink)' }}>
-        <div className="page" style={{ paddingTop: 'clamp(60px, 10vw, 120px)', paddingBottom: 'clamp(60px, 10vw, 120px)' }}>
-          <div className="grid md:grid-cols-3 gap-0">
-            {[
-              { title: 'Found once.', body: 'Every piece is sourced by hand from thrift racks, estate sales, and private collections across India.' },
-              { title: 'Yours alone.', body: 'No restocks, no reissues, no waitlists. When you buy it, it becomes the only one that exists in the world.' },
-              { title: 'Never restocked.', body: 'Once sold, it is gone for good. We do not reproduce, reorder, or source a replacement.' },
-            ].map((col, i) => (
-              <div
-                key={col.title}
-                className={`py-8 md:py-0 md:px-10 ${i > 0 ? 'md:border-l' : ''}`}
-                style={{ borderColor: 'rgba(246,244,239,0.12)', borderTop: i > 0 ? '1px solid rgba(246,244,239,0.12)' : undefined }}
-              >
-                <h3 className="font-display text-2xl mb-3" style={{ fontWeight: 400 }}>{col.title}</h3>
-                <p className="text-sm leading-relaxed" style={{ color: 'rgba(246,244,239,0.6)' }}>{col.body}</p>
-              </div>
-            ))}
-          </div>
+      <section className="story-section" data-reveal>
+        <div className="story-section__texture" aria-hidden="true" />
+        <div className="story-section__mark" aria-hidden="true"><Logo variant="mark" height={96} /></div>
+        <div className="story-section__inner">
+          <p className="eyebrow">A different kind of wardrobe</p>
+          <h2>Made by time.<br /><em>Found by chance.</em></h2>
+          <p>We seek out garments with a little life in them. Each one is selected for its character, quality and quiet ability to feel like yours.</p>
+          <Link to="/about" className="campaign-link campaign-link--light">Our point of view <span className="campaign-link__icon"><ArrowRight size={16} /></span></Link>
+        </div>
+        <div className="story-section__caption"><span>ONEEEPIIECE</span><span>Every piece has a story.</span></div>
+      </section>
+
+      <section className="principles-section home-section">
+        <div className="principles-heading" data-reveal>
+          <p className="eyebrow">The ONEEEPIIECE approach</p>
+          <h2>Wear what<br className="sm:hidden" /> speaks to you.</h2>
+        </div>
+        <div className="principles-grid">
+          {[
+            { number: '01', title: 'Found with care', body: 'Sourced slowly from thrift racks, estate sales and private collections across India.' },
+            { number: '02', title: 'One of one', body: 'A singular find, chosen for its feel, its story and the life still waiting in it.' },
+            { number: '03', title: 'Yours to keep', body: 'When a piece finds its person, it leaves our edit for good. No restocks, ever.' },
+          ].map((item, i) => (
+            <article className="principle" data-reveal key={item.number} style={{ transitionDelay: `${i * 100}ms` }}>
+              <span className="principle__number">{item.number}</span>
+              <h3>{item.title}</h3>
+              <p>{item.body}</p>
+            </article>
+          ))}
         </div>
       </section>
 
-      {/* Sell to us CTA */}
-      <section className="page" style={{ paddingTop: 'clamp(60px, 10vw, 120px)', paddingBottom: 'clamp(60px, 10vw, 120px)' }}>
-        <div className="grid md:grid-cols-2 gap-12 md:gap-20 items-center">
-          <div>
-            <h2 className="mb-4" style={{ fontWeight: 400 }}>Have something to sell?</h2>
-            <p className="text-base mb-8" style={{ color: 'var(--ink-2)' }}>
-              Send us your pieces. Tell us the size, condition and your price.
-            </p>
-            <Link to="/sell" className="btn btn-primary">
-              Sell to us
-              <ArrowRight size={16} />
-            </Link>
-          </div>
-          <div className="product-media aspect-[4/5] md:aspect-[4/3]">
-            <img
-              src="https://images.pexels.com/photos/3998648/pexels-photo-3998648.jpeg?auto=compress&cs=tinysrgb&w=1200"
-              alt="Folded vintage clothing"
-              className="w-full h-full object-cover"
-            />
-          </div>
+      <section className="source-section">
+        <div className="source-section__image" role="img" aria-label="Carefully selected vintage clothing" />
+        <div className="source-section__copy" data-reveal>
+          <p className="eyebrow">The next story could be yours</p>
+          <h2>Pass something<br /><em>good along.</em></h2>
+          <p>Have a piece that deserves another chapter? We would love to see it.</p>
+          <Link to="/sell" className="campaign-link">Sell to us <span className="campaign-link__icon"><ArrowRight size={16} /></span></Link>
         </div>
+        <span className="source-section__index">A small circle of good things · 2026</span>
       </section>
     </div>
   );
 }
+
